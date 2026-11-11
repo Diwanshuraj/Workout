@@ -10,6 +10,7 @@ class AppController {
     this.scrollSpyObserver = null;
     this.sections = [
       "home",
+      "explore",
       "about",
       "classes",
       "tracker",
@@ -18,6 +19,61 @@ class AppController {
       "team",
       "contact"
     ];
+
+    // Anime Beast Mode & Juice Lab State (Screen 1 & 2)
+    this.heroMode = "anime"; // "anime" or "gym"
+    this.animeExercises = [
+      {
+        id: "deadlift",
+        name: "Olympic Barbell Deadlifts",
+        muscle: "Posterior Chain & Core",
+        count: "1 OF 32",
+        graphic: "assets/anime/goku-deadlift.svg",
+        timerSeconds: 125,
+        bpm: 148
+      },
+      {
+        id: "warmup",
+        name: "Dynamic Martial Warm-Up",
+        muscle: "Joint Mobility & Flow",
+        count: "2 OF 32",
+        graphic: "assets/anime/goku-warmup.svg",
+        timerSeconds: 90,
+        bpm: 124
+      },
+      {
+        id: "strength",
+        name: "Super Saiyan Power Squat",
+        muscle: "Quads, Glutes & Traps",
+        count: "3 OF 32",
+        graphic: "assets/anime/goku-strength.svg",
+        timerSeconds: 180,
+        bpm: 162
+      },
+      {
+        id: "cardio",
+        name: "Super Speed Sprint HIIT",
+        muscle: "Full Body VO2 Max",
+        count: "4 OF 32",
+        graphic: "assets/anime/goku-cardio.svg",
+        timerSeconds: 60,
+        bpm: 174
+      },
+      {
+        id: "mobility",
+        name: "Zen Ki Focus & Recovery",
+        muscle: "Parasympathetic Breathing",
+        count: "5 OF 32",
+        graphic: "assets/anime/goku-mobility.svg",
+        timerSeconds: 120,
+        bpm: 96
+      }
+    ];
+    this.currentAnimeIndex = 0;
+    this.animeTimerSeconds = 125;
+    this.isAnimeTimerRunning = true;
+    this.animeTimerInterval = null;
+    this.isAudioMuted = false;
   }
 
   init() {
@@ -59,6 +115,10 @@ class AppController {
     this.setupScrollAnimations();
     this.setupCounterAnimation();
     this.setupTelemetrySimulation();
+
+    // 8. Start Anime Hero Beast Mode Timer & Circular Progress Observer
+    this.initAnimeTimer();
+    this.setupCircularProgressObserver();
   }
 
   // --- GYMLIFE DYNAMIC SECTIONS RENDERING ---
@@ -586,6 +646,348 @@ class AppController {
       const targetBpm = Math.min(156, Math.max(140, 146 + variation));
       bpmEl.textContent = targetBpm;
     }, 2800);
+  }
+
+  // --- HERO BEAST MODE CONTROLS (Screen 1 Inspired) ---
+  setHeroMode(mode) {
+    this.heroMode = mode;
+    const animeFrame = document.getElementById("heroAnimeFrame");
+    const gymFrame = document.getElementById("heroGymFrame");
+    const animeControls = document.getElementById("heroAnimeControls");
+    const gymControls = document.getElementById("heroGymControls");
+    const animeBtn = document.getElementById("heroModeAnimeBtn");
+    const gymBtn = document.getElementById("heroModeGymBtn");
+
+    if (mode === "anime") {
+      if (animeFrame) animeFrame.classList.remove("hidden");
+      if (gymFrame) gymFrame.classList.add("hidden");
+      if (animeControls) animeControls.classList.remove("hidden");
+      if (gymControls) gymControls.classList.add("hidden");
+      if (animeBtn) animeBtn.classList.add("active");
+      if (gymBtn) gymBtn.classList.remove("active");
+      this.updateAnimeDisplay();
+    } else {
+      if (animeFrame) animeFrame.classList.add("hidden");
+      if (gymFrame) gymFrame.classList.remove("hidden");
+      if (animeControls) animeControls.classList.add("hidden");
+      if (gymControls) gymControls.classList.remove("hidden");
+      if (animeBtn) animeBtn.classList.remove("active");
+      if (gymBtn) gymBtn.classList.add("active");
+    }
+  }
+
+  switchAnimeExercise(id, btnEl) {
+    const idx = this.animeExercises.findIndex((ex) => ex.id === id);
+    if (idx !== -1) {
+      this.currentAnimeIndex = idx;
+      const ex = this.animeExercises[idx];
+      this.animeTimerSeconds = ex.timerSeconds;
+      this.updateAnimeDisplay();
+      if (btnEl) {
+        document.querySelectorAll(".reel-item").forEach((b) => {
+          b.classList.remove("active");
+          const ring = b.querySelector(".reel-avatar-ring");
+          if (ring) ring.classList.remove("glow-ring");
+        });
+        btnEl.classList.add("active");
+        const ring = btnEl.querySelector(".reel-avatar-ring");
+        if (ring) ring.classList.add("glow-ring");
+      }
+      this.playToneChime(660);
+    }
+  }
+
+  prevAnimeExercise() {
+    this.currentAnimeIndex = (this.currentAnimeIndex - 1 + this.animeExercises.length) % this.animeExercises.length;
+    this.syncActiveReelButton();
+  }
+
+  nextAnimeExercise() {
+    this.currentAnimeIndex = (this.currentAnimeIndex + 1) % this.animeExercises.length;
+    this.syncActiveReelButton();
+  }
+
+  syncActiveReelButton() {
+    const ex = this.animeExercises[this.currentAnimeIndex];
+    this.animeTimerSeconds = ex.timerSeconds;
+    this.updateAnimeDisplay();
+    const buttons = document.querySelectorAll(".reel-item");
+    if (buttons && buttons[this.currentAnimeIndex]) {
+      buttons.forEach((b) => {
+        b.classList.remove("active");
+        const ring = b.querySelector(".reel-avatar-ring");
+        if (ring) ring.classList.remove("glow-ring");
+      });
+      buttons[this.currentAnimeIndex].classList.add("active");
+      const ring = buttons[this.currentAnimeIndex].querySelector(".reel-avatar-ring");
+      if (ring) ring.classList.add("glow-ring");
+    }
+    this.playToneChime(740);
+  }
+
+  updateAnimeDisplay() {
+    const ex = this.animeExercises[this.currentAnimeIndex];
+    if (!ex) return;
+
+    const img = document.getElementById("heroAnimeGraphic");
+    const countEl = document.getElementById("heroAnimeCount");
+    const nameEl = document.getElementById("heroAnimeName");
+    const muscleEl = document.getElementById("heroExerciseMuscle");
+    const bpmEl = document.getElementById("heroTelemetryBpm");
+
+    if (img) img.src = ex.graphic;
+    if (countEl) countEl.textContent = ex.count;
+    if (nameEl) nameEl.textContent = ex.name;
+    if (muscleEl) muscleEl.textContent = `${ex.name.split(" ")[0]} • ${ex.muscle}`;
+    if (bpmEl) bpmEl.textContent = ex.bpm;
+
+    this.renderDotMatrixTime();
+  }
+
+  initAnimeTimer() {
+    this.renderDotMatrixTime();
+    if (this.animeTimerInterval) clearInterval(this.animeTimerInterval);
+
+    this.animeTimerInterval = setInterval(() => {
+      if (this.isAnimeTimerRunning) {
+        if (this.animeTimerSeconds > 0) {
+          this.animeTimerSeconds--;
+          this.renderDotMatrixTime();
+          if (this.animeTimerSeconds === 3 || this.animeTimerSeconds === 2 || this.animeTimerSeconds === 1) {
+            this.playToneChime(880);
+          }
+        } else {
+          this.playToneChime(1200, 0.3);
+          this.showToast(`Workout Set Complete! Smashing records.`, "success");
+          const ex = this.animeExercises[this.currentAnimeIndex];
+          this.animeTimerSeconds = ex.timerSeconds;
+        }
+      }
+    }, 1000);
+  }
+
+  toggleAnimeTimer() {
+    this.isAnimeTimerRunning = !this.isAnimeTimerRunning;
+    const playBtn = document.getElementById("animePlayPauseBtn");
+    const icon = document.getElementById("animePlayPauseIcon");
+
+    if (this.isAnimeTimerRunning) {
+      if (playBtn) playBtn.classList.remove("is-paused");
+      if (icon) {
+        icon.innerHTML = '<span class="p-bar"></span><span class="p-bar"></span>';
+      }
+      this.playToneChime(800);
+    } else {
+      if (playBtn) playBtn.classList.add("is-paused");
+      if (icon) {
+        icon.innerHTML = '<span class="play-triangle-icon">▶</span>';
+      }
+      this.playToneChime(400);
+    }
+  }
+
+  renderDotMatrixTime() {
+    const timerEl = document.getElementById("dotMatrixTimer");
+    if (!timerEl) return;
+    const mins = Math.floor(this.animeTimerSeconds / 60);
+    const secs = this.animeTimerSeconds % 60;
+    const pad = (n) => (n < 10 ? "0" + n : n);
+    timerEl.textContent = `${pad(mins)}:${pad(secs)}`;
+  }
+
+  toggleAudioMute() {
+    this.isAudioMuted = !this.isAudioMuted;
+    const btn = document.getElementById("animeMuteBtn");
+    if (btn) {
+      btn.style.opacity = this.isAudioMuted ? "0.4" : "1";
+    }
+    this.showToast(this.isAudioMuted ? "Sound muted" : "Audio cues active", "info");
+  }
+
+  playToneChime(freq = 600, duration = 0.08) {
+    if (this.isAudioMuted) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (e) {}
+  }
+
+  playToneChimeWithRhythm() {
+    this.playToneChime(520, 0.08);
+    setTimeout(() => this.playToneChime(660, 0.08), 120);
+    setTimeout(() => this.playToneChime(820, 0.12), 240);
+  }
+
+  // --- JUICE LAB DISCOVERY & CATEGORIES (Screen 2) ---
+  filterCategoryAndScroll(cat, btnEl) {
+    document.querySelectorAll(".cat-card-pill").forEach((b) => b.classList.remove("active"));
+    if (btnEl) btnEl.classList.add("active");
+
+    this.playToneChime(700);
+
+    // Switch tracker tab to exercises and apply category filter
+    this.switchTrackerTab("exercises");
+    if (window.exerciseLibrary) {
+      window.exerciseLibrary.setCategory(cat);
+    }
+    this.scrollToSection("tracker");
+    this.showToast(`Filter applied: ${cat.toUpperCase()}`, "info");
+  }
+
+  startQuickWorkoutRoutine(routineKey) {
+    this.switchTrackerTab("workout");
+    this.scrollToSection("tracker");
+
+    if (routineKey === "full_body") {
+      this.addExerciseToWorkout("ex_barbell_deadlift");
+      this.addExerciseToWorkout("ex_bench_press");
+      this.addExerciseToWorkout("ex_barbell_squat");
+      this.showToast("Loaded 'Full Body Strength' routine (351 kcal target)!", "success");
+    } else if (routineKey === "cardio") {
+      this.addExerciseToWorkout("ex_burpee");
+      this.addExerciseToWorkout("ex_jumping_jack");
+      this.addExerciseToWorkout("ex_mountain_climber");
+      this.showToast("Loaded 'Outdoor Cardio HIIT' routine (280 kcal burn)!", "success");
+    }
+    this.playToneChimeWithRhythm();
+  }
+
+  setupCircularProgressObserver() {
+    if (!("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const wrap = entry.target;
+            const percent = parseInt(wrap.getAttribute("data-percent") || "0", 10);
+            const fill = wrap.querySelector(".ring-fill");
+            if (fill) {
+              const circumference = 132;
+              const offset = circumference - (percent / 100) * circumference;
+              fill.style.strokeDashoffset = offset;
+            }
+            observer.unobserve(wrap);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll(".circular-progress-wrap").forEach((el) => observer.observe(el));
+  }
+
+  // --- JUICE LAB AI FITNESS COACH (Screen 3) ---
+  openAiCoachModal() {
+    const backdrop = document.getElementById("aiCoachBackdrop");
+    if (backdrop) {
+      backdrop.classList.remove("hidden");
+      this.playToneChime(850, 0.1);
+    }
+  }
+
+  closeAiCoachModal() {
+    const backdrop = document.getElementById("aiCoachBackdrop");
+    if (backdrop) backdrop.classList.add("hidden");
+  }
+
+  triggerVoiceAiInteraction() {
+    const micBtn = document.getElementById("voiceMicBtn");
+    const msgEl = document.getElementById("aiMessageText");
+    const actionSlot = document.getElementById("aiActionSlot");
+
+    if (micBtn) micBtn.classList.add("listening");
+    if (msgEl) msgEl.textContent = "🎙️ Listening to your voice... Speak your workout target or question now.";
+    this.playToneChime(950, 0.15);
+
+    setTimeout(() => {
+      if (micBtn) micBtn.classList.remove("listening");
+      if (msgEl) {
+        msgEl.innerHTML = `<strong>"Full Body Strength Plan" detected!</strong><br />Here is your optimal 351 kcal routine: Barbell Deadlift (4x8) + Overhead Press (4x10) + Bulgarian Split Squat (3x12).`;
+      }
+      if (actionSlot) {
+        actionSlot.innerHTML = `
+          <button class="btn-gymlife btn-sm mt-3" onclick="window.app.startQuickWorkoutRoutine('full_body'); window.app.closeAiCoachModal();">
+            Load Routine into Tracker &rarr;
+          </button>
+        `;
+      }
+      this.playToneChimeWithRhythm();
+    }, 2200);
+  }
+
+  askAiPrompt(promptKey) {
+    const msgEl = document.getElementById("aiMessageText");
+    const actionSlot = document.getElementById("aiActionSlot");
+    if (!msgEl) return;
+
+    this.playToneChime(750, 0.08);
+
+    const prompts = {
+      plan_workout: {
+        text: `⚡ <strong>Juice Lab AI Routine:</strong> Today's focus is High-Torque Compound Power. 5 min dynamic warmup followed by Deadlifts (4 sets), Bench Press (4 sets), and Lat Pulldowns (3 sets). Target burn: <strong>420 kcal</strong>.`,
+        action: `<button class="btn-gymlife btn-sm mt-2" onclick="window.app.startQuickWorkoutRoutine('full_body'); window.app.closeAiCoachModal();">Load Routine to Tracker &rarr;</button>`
+      },
+      give_challenge: {
+        text: `🔥 <strong>Saiyan Beast Challenge:</strong> Complete 50 Pushups, 50 Jump Squats, and 30 Mountain Climbers in under 8 minutes! Timer will track your tempo.`,
+        action: `<button class="btn-gymlife btn-sm mt-2" onclick="window.app.startQuickWorkoutRoutine('cardio'); window.app.closeAiCoachModal();">Accept Challenge &rarr;</button>`
+      },
+      what_eat: {
+        text: `🥗 <strong>Macro Fuel Protocol:</strong> Post-training, aim for 35g Whey/Plant Protein + 65g Complex Carbohydrates (Oats/Rice) + 500ml electrolyte water for optimal glycogen synthesis.`,
+        action: ``
+      },
+      strength_routine: {
+        text: `🏋️ <strong>Hypertrophy Overload:</strong> Barbell Bench Press (3x8-10 @ RPE 8) ➔ Incline Dumbbell Flyes (3x12) ➔ Tricep Rope Pushdowns (4x12-15). 90s rest with audio chimes.`,
+        action: `<button class="btn-gymlife btn-sm mt-2" onclick="window.app.startQuickWorkoutRoutine('full_body'); window.app.closeAiCoachModal();">Start Strength Routine &rarr;</button>`
+      },
+      set_goal: {
+        text: `🎯 <strong>Daily Target Active:</strong> Burn 500 kcal, complete 16 total sets, and log all weights to trigger automatic progressive overload PR detection!`,
+        action: ``
+      },
+      recovery_tips: {
+        text: `💤 <strong>Recovery Science:</strong> 7.5 to 8.5 hours sleep tonight. 10 minutes foam rolling on quads and thoracic spine. Hydrate with 3.5 liters throughout the day.`,
+        action: ``
+      },
+      show_progress: {
+        text: `📊 <strong>Athlete Stats:</strong> 52+ exercises ready in your engine. Active streak: <strong>7 Days</strong>. All system metrics operating in Zone 4.`,
+        action: `<button class="btn-gymlife btn-sm mt-2" onclick="window.app.switchTrackerTab('analytics'); window.app.scrollToSection('tracker'); window.app.closeAiCoachModal();">View Analytics &rarr;</button>`
+      }
+    };
+
+    const res = prompts[promptKey] || prompts.plan_workout;
+    msgEl.innerHTML = res.text;
+    if (actionSlot) actionSlot.innerHTML = res.action;
+  }
+
+  // --- MOBILE GLASS DOCK NAVIGATION ---
+  navigateDock(dest, btnEl) {
+    document.querySelectorAll(".dock-item").forEach((b) => b.classList.remove("active"));
+    if (btnEl) btnEl.classList.add("active");
+
+    this.playToneChime(640, 0.06);
+
+    if (dest === "home") {
+      this.scrollToSection("home");
+    } else if (dest === "explore") {
+      this.scrollToSection("explore");
+    } else if (dest === "workout") {
+      this.switchTrackerTab("workout");
+      this.scrollToSection("tracker");
+    } else if (dest === "library") {
+      this.switchTrackerTab("exercises");
+      this.scrollToSection("tracker");
+    }
   }
 
   // --- TOAST NOTIFICATIONS ---

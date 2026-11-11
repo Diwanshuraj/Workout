@@ -54,6 +54,7 @@
       <!-- Desktop Nav Links -->
       <nav class="main-nav-links">
         <a href="#home" class="nav-link active" data-section="home" onclick="window.app.scrollToSection('home', event)">Home</a>
+        <a href="#explore" class="nav-link" data-section="explore" onclick="window.app.scrollToSection('explore', event)">Disciplines</a>
         <a href="#about" class="nav-link" data-section="about" onclick="window.app.scrollToSection('about', event)">About Us</a>
         <a href="#classes" class="nav-link" data-section="classes" onclick="window.app.scrollToSection('classes', event)">Classes</a>
         <a href="#tracker" class="nav-link" data-section="tracker" onclick="window.app.scrollToSection('tracker', event)">Workout Tracker</a>
@@ -65,6 +66,10 @@
 
       <!-- Right Header CTA & Mobile Hamburger -->
       <div class="header-cta-group">
+        <button class="btn-ai-header-cta" onclick="window.app.openAiCoachModal()" title="Open Juice Lab AI Fitness Coach">
+          <span class="ai-glow-dot"></span>
+          <span>🤖 AI Coach</span>
+        </button>
         <button class="btn-gymlife" onclick="window.app.scrollToSection('tracker', event)">
           Start Workout
         </button>
@@ -154,31 +159,109 @@
             </div>
           </div>
 
-          <!-- Main Interactive Workout Display Card -->
+          <!-- Main Interactive Workout Display Card (Juice Lab & Saiyan Beast Mode) -->
           <div class="hero-interactive-card">
             <div class="hero-card-header">
-              <div class="card-status-indicator">
-                <span class="pulse-dot"></span>
-                <span id="heroExerciseStatus">LIVE FORM DEMONSTRATION</span>
+              <div class="hero-mode-switch">
+                <button class="mode-pill active" id="heroModeAnimeBtn" onclick="window.app.setHeroMode('anime')">⚡ BEAST MODE</button>
+                <button class="mode-pill" id="heroModeGymBtn" onclick="window.app.setHeroMode('gym')">🏋️ GYM FORM GIF</button>
               </div>
-              <span class="hero-pill-badge" id="heroExerciseMuscle">Chest &bull; Barbell</span>
+              <span class="hero-pill-badge" id="heroExerciseMuscle">Deadlifts &bull; Barbell</span>
             </div>
 
+            <!-- Frame Container (Anime Character / Video Demonstration) -->
             <div class="hero-video-frame">
-              <img id="heroExerciseVideo" src="https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-bench-press.gif" alt="Workout Demonstration" class="hero-video-img" />
-              <div class="hero-video-overlay-bar">
-                <div class="hero-ex-info">
-                  <h4 id="heroExerciseTitle">Barbell Bench Press</h4>
-                  <span id="heroExerciseSub">4 Sets &bull; 8-10 Reps &bull; 90s Rest</span>
+              <!-- 1. Anime Athletic Frame (Inspired by Screen 1 of reference design) -->
+              <div id="heroAnimeFrame" class="hero-anime-showcase">
+                <img id="heroAnimeGraphic" src="assets/anime/goku-deadlift.svg" alt="Anime Workout Character" class="hero-anime-img" />
+                <div class="anime-ki-aura-effect"></div>
+                <div class="anime-hero-overlay">
+                  <span class="anime-exercise-counter" id="heroAnimeCount">1 OF 32</span>
+                  <h3 class="anime-exercise-title" id="heroAnimeName">Deadlifts</h3>
                 </div>
-                <button class="hero-play-action-btn" onclick="window.app.addExerciseToWorkout('ex_bench_press'); window.app.switchTrackerTab('workout');" title="Train this movement">
-                  <span>Train Now &rarr;</span>
+              </div>
+
+              <!-- 2. Gym Video GIF Frame (hidden when anime mode is active) -->
+              <div id="heroGymFrame" class="hero-gym-showcase hidden">
+                <img id="heroExerciseVideo" src="https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-bench-press.gif" alt="Workout Demonstration" class="hero-video-img" />
+                <div class="hero-video-overlay-bar">
+                  <div class="hero-ex-info">
+                    <h4 id="heroExerciseTitle">Barbell Bench Press</h4>
+                    <span id="heroExerciseSub">4 Sets &bull; 8-10 Reps &bull; 90s Rest</span>
+                  </div>
+                  <button class="hero-play-action-btn" onclick="window.app.addExerciseToWorkout('ex_bench_press'); window.app.switchTrackerTab('workout');" title="Train this movement">
+                    <span>Train Now &rarr;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Anime Beast Mode Circular Reel & LED Timer (Screen 1) -->
+            <div id="heroAnimeControls" class="anime-reel-and-player">
+              <!-- Circular Workout Switcher Reel (Screen 1) -->
+              <div class="circular-reel-wrap">
+                <button class="reel-item" onclick="window.app.switchAnimeExercise('warmup', this)">
+                  <div class="reel-avatar-ring">
+                    <span class="reel-icon">🥋</span>
+                  </div>
+                  <span class="reel-label">Warm up</span>
+                </button>
+                <button class="reel-item" onclick="window.app.switchAnimeExercise('strength', this)">
+                  <div class="reel-avatar-ring">
+                    <span class="reel-icon">🏋️</span>
+                  </div>
+                  <span class="reel-label">Strength</span>
+                </button>
+                <button class="reel-item active" onclick="window.app.switchAnimeExercise('deadlift', this)">
+                  <div class="reel-avatar-ring glow-ring">
+                    <span class="reel-icon">⚡</span>
+                  </div>
+                  <span class="reel-label">Deadlifts</span>
+                </button>
+                <button class="reel-item" onclick="window.app.switchAnimeExercise('cardio', this)">
+                  <div class="reel-avatar-ring">
+                    <span class="reel-icon">🏃</span>
+                  </div>
+                  <span class="reel-label">Cardio</span>
+                </button>
+                <button class="reel-item" onclick="window.app.switchAnimeExercise('mobility', this)">
+                  <div class="reel-avatar-ring">
+                    <span class="reel-icon">🧘</span>
+                  </div>
+                  <span class="reel-label">Mobility</span>
                 </button>
               </div>
+
+              <!-- Dotted Digital Dot-Matrix LED Timer (Screen 1) -->
+              <div class="dot-matrix-clock-dock">
+                <div class="dot-matrix-timer-val" id="dotMatrixTimer">02:05</div>
+
+                <!-- Frosted Glass Player Controls (Screen 1) -->
+                <div class="anime-player-dock">
+                  <button class="dock-btn" onclick="window.app.toggleAudioMute()" title="Mute/Unmute" id="animeMuteBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                  <button class="dock-btn" onclick="window.app.prevAnimeExercise()" title="Previous Exercise">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+                  </button>
+                  <button class="dock-btn dock-btn-play" onclick="window.app.toggleAnimeTimer()" title="Play / Pause" id="animePlayPauseBtn">
+                    <div class="pause-bars-icon" id="animePlayPauseIcon">
+                      <span class="p-bar"></span>
+                      <span class="p-bar"></span>
+                    </div>
+                  </button>
+                  <button class="dock-btn" onclick="window.app.nextAnimeExercise()" title="Next Exercise">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+                  </button>
+                  <button class="dock-btn" onclick="window.app.playToneChime()" title="Rhythm Beep">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <!-- Quick Workout Switcher Chips -->
-            <div class="hero-switcher-chips">
+            <!-- Quick Workout Switcher Chips (Gym GIF Mode) -->
+            <div id="heroGymControls" class="hero-switcher-chips hidden">
               <button class="chip-btn active" onclick="window.app.switchHeroExercise('ex_bench_press', this)">Bench Press</button>
               <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_barbell_squat', this)">Squat</button>
               <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_barbell_deadlift', this)">Deadlift</button>
@@ -266,6 +349,179 @@
       <span class="ticker-item"><span class="ticker-icon">🔥</span> ZERO SUBSCRIPTIONS &bull; 100% FREE</span>
     </div>
   </div>
+
+  <!-- ======================================================================
+       JUICE LAB DISCOVERY SECTION (Disciplines & Featured Workouts - Screen 2)
+       ====================================================================== -->
+  <section id="explore" class="page-section section-discovery" data-nav="explore">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">ATHLETIC DISCIPLINES</span>
+        <h2 class="section-title-gymlife">WORKOUT CATEGORIES</h2>
+      </div>
+
+      <!-- Horizontal Circular Reel (Screen 2) -->
+      <div class="category-reel-scroll-wrap">
+        <div class="category-reel-track">
+          <button class="cat-card-pill active" onclick="window.app.filterCategoryAndScroll('all', this)">
+            <div class="cat-card-ring">
+              <img src="assets/anime/cat-fullbody.svg" alt="Full Body" class="cat-ring-img" />
+            </div>
+            <span class="cat-pill-label">Full Body</span>
+          </button>
+          <button class="cat-card-pill" onclick="window.app.filterCategoryAndScroll('chest', this)">
+            <div class="cat-card-ring">
+              <img src="assets/anime/cat-strength.svg" alt="Strength" class="cat-ring-img" />
+            </div>
+            <span class="cat-pill-label">Strength</span>
+          </button>
+          <button class="cat-card-pill" onclick="window.app.filterCategoryAndScroll('cardio', this)">
+            <div class="cat-card-ring">
+              <img src="assets/anime/cat-hiit.svg" alt="HIIT" class="cat-ring-img" />
+            </div>
+            <span class="cat-pill-label">HIIT</span>
+          </button>
+          <button class="cat-card-pill" onclick="window.app.filterCategoryAndScroll('legs', this)">
+            <div class="cat-card-ring">
+              <img src="assets/anime/cat-agility.svg" alt="Agility" class="cat-ring-img" />
+            </div>
+            <span class="cat-pill-label">Agility</span>
+          </button>
+          <button class="cat-card-pill" onclick="window.app.filterCategoryAndScroll('back', this)">
+            <div class="cat-card-ring">
+              <img src="assets/anime/cat-mobility.svg" alt="Mobility" class="cat-ring-img" />
+            </div>
+            <span class="cat-pill-label">Mobility</span>
+          </button>
+          <button class="cat-card-pill" onclick="window.app.filterCategoryAndScroll('arms', this)">
+            <div class="cat-card-ring">
+              <img src="assets/anime/cat-cardio.svg" alt="Cardio" class="cat-ring-img" />
+            </div>
+            <span class="cat-pill-label">Cardio</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Featured & Active Workouts Dual Layout (Screen 2) -->
+      <div class="discovery-dual-grid">
+        <!-- Left Column: Featured Workouts -->
+        <div class="discovery-column">
+          <div class="column-header-row">
+            <h3 class="column-title">Featured Workouts</h3>
+            <button class="column-view-all" onclick="window.app.switchTrackerTab('exercises'); window.app.scrollToSection('tracker', event)">View All &rarr;</button>
+          </div>
+          <div class="featured-cards-grid">
+            <!-- Card 1: Full Body Strength -->
+            <div class="featured-workout-card reveal-item">
+              <div class="featured-card-media">
+                <img src="assets/anime/goku-deadlift.svg" alt="Full Body Strength" class="featured-card-img" />
+                <span class="featured-badge-pill">Advanced</span>
+              </div>
+              <div class="featured-card-body">
+                <h4 class="featured-card-title">Full Body Strength</h4>
+                <div class="featured-metrics-row">
+                  <span class="f-metric"><span class="m-icon">🔥</span> 351 kcal</span>
+                  <span class="f-metric"><span class="m-icon">⏱️</span> 25 Minutes</span>
+                  <span class="f-metric"><span class="m-icon">⭐</span> +3 Score</span>
+                </div>
+                <button class="btn-start-featured" onclick="window.app.startQuickWorkoutRoutine('full_body')">
+                  Start Workout &rarr;
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: Outdoor Cardio -->
+            <div class="featured-workout-card reveal-item">
+              <div class="featured-card-media">
+                <img src="assets/anime/goku-cardio.svg" alt="Outdoor Cardio" class="featured-card-img" />
+                <span class="featured-badge-pill">HIIT Sprint</span>
+              </div>
+              <div class="featured-card-body">
+                <h4 class="featured-card-title">Outdoor Cardio</h4>
+                <div class="featured-metrics-row">
+                  <span class="f-metric"><span class="m-icon">🔥</span> 280 kcal</span>
+                  <span class="f-metric"><span class="m-icon">⏱️</span> 20 Minutes</span>
+                  <span class="f-metric"><span class="m-icon">⭐</span> +3 Score</span>
+                </div>
+                <button class="btn-start-featured" onclick="window.app.startQuickWorkoutRoutine('cardio')">
+                  Start Workout &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Active Workouts with SVG Animated Rings -->
+        <div class="discovery-column">
+          <div class="column-header-row">
+            <h3 class="column-title">Active Workouts</h3>
+            <button class="column-view-all" onclick="window.app.switchTrackerTab('history'); window.app.scrollToSection('tracker', event)">View History &rarr;</button>
+          </div>
+          <div class="active-workouts-list">
+            <!-- Active 1: Shoulder & Back -->
+            <div class="active-workout-item reveal-item">
+              <div class="active-item-thumb">
+                <img src="assets/anime/goku-strength.svg" alt="Shoulder & Back" />
+              </div>
+              <div class="active-item-info">
+                <span class="active-item-tag">Best for upper body</span>
+                <h4 class="active-item-title">Shoulder & Back</h4>
+                <span class="active-item-sub">⏱️ 34 min &bull; 📍 12.5 km</span>
+              </div>
+              <!-- Animated Circular Progress Ring (20%) -->
+              <div class="circular-progress-wrap" data-percent="20">
+                <svg class="progress-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+                  <circle class="ring-track" cx="27" cy="27" r="21" />
+                  <circle class="ring-fill ring-orange" cx="27" cy="27" r="21" stroke-dasharray="132" stroke-dashoffset="105" />
+                </svg>
+                <span class="ring-text">20%</span>
+              </div>
+            </div>
+
+            <!-- Active 2: Chest & Triceps -->
+            <div class="active-workout-item reveal-item">
+              <div class="active-item-thumb">
+                <img src="assets/anime/goku-deadlift.svg" alt="Chest & Triceps" />
+              </div>
+              <div class="active-item-info">
+                <span class="active-item-tag">Best for hypertrophy</span>
+                <h4 class="active-item-title">Chest & Triceps</h4>
+                <span class="active-item-sub">⏱️ 45 min &bull; 🔥 380 kcal</span>
+              </div>
+              <!-- Animated Circular Progress Ring (65%) -->
+              <div class="circular-progress-wrap" data-percent="65">
+                <svg class="progress-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+                  <circle class="ring-track" cx="27" cy="27" r="21" />
+                  <circle class="ring-fill ring-cyan" cx="27" cy="27" r="21" stroke-dasharray="132" stroke-dashoffset="46" />
+                </svg>
+                <span class="ring-text">65%</span>
+              </div>
+            </div>
+
+            <!-- Active 3: Core & Flexibility -->
+            <div class="active-workout-item reveal-item">
+              <div class="active-item-thumb">
+                <img src="assets/anime/goku-mobility.svg" alt="Core & Flexibility" />
+              </div>
+              <div class="active-item-info">
+                <span class="active-item-tag">Best for recovery</span>
+                <h4 class="active-item-title">Core & Mobility</h4>
+                <span class="active-item-sub">⏱️ 18 min &bull; 🧘 Zen Stretch</span>
+              </div>
+              <!-- Animated Circular Progress Ring (90%) -->
+              <div class="circular-progress-wrap" data-percent="90">
+                <svg class="progress-ring-svg" width="54" height="54" viewBox="0 0 54 54">
+                  <circle class="ring-track" cx="27" cy="27" r="21" />
+                  <circle class="ring-fill ring-green" cx="27" cy="27" r="21" stroke-dasharray="132" stroke-dashoffset="13" />
+                </svg>
+                <span class="ring-text">90%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ======================================================================
        PAGE SECTION 2: ABOUT / CHOOSE US (Why Choose Us)
@@ -668,34 +924,121 @@
   </button>
 
   <!-- ======================================================================
-       MOBILE BOTTOM NAVIGATION BAR
+       FLOATING AI COACH PILL BUTTON (Desktop)
        ====================================================================== -->
-  <nav class="bottom-nav-bar">
-    <a href="#home" class="bottom-nav-item active" data-section="home" onclick="window.app.scrollToSection('home', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-      <span>Home</span>
-    </a>
-    <a href="#classes" class="bottom-nav-item" data-section="classes" onclick="window.app.scrollToSection('classes', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
-      <span>Classes</span>
-    </a>
-    <a href="#tracker" class="bottom-nav-item" data-section="tracker" onclick="window.app.scrollToSection('tracker', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      <span>Workout</span>
-    </a>
-    <a href="#bmi-calculator" class="bottom-nav-item" data-section="bmi-calculator" onclick="window.app.scrollToSection('bmi-calculator', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <span>BMI</span>
-    </a>
-    <a href="#pricing" class="bottom-nav-item" data-section="pricing" onclick="window.app.scrollToSection('pricing', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      <span>Pricing</span>
-    </a>
-    <a href="#contact" class="bottom-nav-item" data-section="contact" onclick="window.app.scrollToSection('contact', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Contact</span>
-    </a>
+  <button class="floating-ai-coach-pill" onclick="window.app.openAiCoachModal()" title="Ask Juice Lab AI Coach">
+    <div class="ai-pill-radar-glow"></div>
+    <span class="ai-pill-icon">🤖</span>
+    <span class="ai-pill-label">AI Coach</span>
+    <span class="ai-pill-dot"></span>
+  </button>
+
+  <!-- ======================================================================
+       JUICE LAB MOBILE FLOATING GLASS DOCK (Screen 2 Navigation Dock)
+       ====================================================================== -->
+  <nav class="mobile-glass-dock" id="mobileGlassDock">
+    <button class="dock-item active" data-dock="home" onclick="window.app.navigateDock('home', this)">
+      <span class="dock-icon">🏠</span>
+      <span class="dock-label">Home</span>
+    </button>
+    <button class="dock-item" data-dock="explore" onclick="window.app.navigateDock('explore', this)">
+      <span class="dock-icon">⚡</span>
+      <span class="dock-label">Disciplines</span>
+    </button>
+    <button class="dock-item dock-ai-center" onclick="window.app.openAiCoachModal()">
+      <div class="dock-ai-glow">
+        <span class="dock-ai-icon">🤖</span>
+      </div>
+      <span class="dock-label">AI Chat</span>
+    </button>
+    <button class="dock-item" data-dock="workout" onclick="window.app.navigateDock('workout', this)">
+      <span class="dock-icon">🏋️</span>
+      <span class="dock-label">Workout</span>
+    </button>
+    <button class="dock-item" data-dock="library" onclick="window.app.navigateDock('library', this)">
+      <span class="dock-icon">📂</span>
+      <span class="dock-label">52+ Videos</span>
+    </button>
   </nav>
+
+  <!-- ======================================================================
+       AI FITNESS COACH MODAL (Juice Lab Style - Screen 3)
+       ====================================================================== -->
+  <div class="ai-coach-backdrop hidden" id="aiCoachBackdrop" onclick="window.app.closeAiCoachModal(event)">
+    <div class="ai-coach-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-pull-handle"></div>
+
+      <div class="sheet-header">
+        <button class="sheet-back-btn" onclick="window.app.closeAiCoachModal()" title="Back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="sheet-title-group">
+          <span class="sheet-badge">AI CHAT</span>
+          <h3 class="sheet-title">Juice Lab Fitness AI</h3>
+        </div>
+        <button class="sheet-close-btn" onclick="window.app.closeAiCoachModal()" title="Close">&times;</button>
+      </div>
+
+      <div class="sheet-greeting-box">
+        <h2 class="sheet-user-greeting">Hey <span class="athlete-name">Athlete</span> 👋</h2>
+        <p class="sheet-user-sub">Here's what to focus on today</p>
+      </div>
+
+      <!-- Focused Workout Card (Screen 3) -->
+      <div class="ai-focus-card">
+        <div class="focus-card-thumb">
+          <img src="assets/anime/goku-deadlift.svg" alt="Full Body Strength" />
+        </div>
+        <div class="focus-card-info">
+          <span class="focus-card-badge">RECOMMENDED FOR YOU</span>
+          <h4 class="focus-card-title">Full Body Strength</h4>
+          <div class="focus-card-stats">
+            <span>🔥 351 kcal</span>
+            <span>⏱️ 25 Minutes</span>
+            <span>⭐ +3 Score</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connecting Energy Beam -->
+      <div class="ai-connecting-beam">
+        <div class="beam-line"></div>
+        <span class="beam-label">tap to voice</span>
+      </div>
+
+      <!-- Concentric Pulsing Voice Radar Circle (Screen 3) -->
+      <div class="ai-voice-radar-container">
+        <div class="voice-radar-rings">
+          <div class="radar-wave wave-1"></div>
+          <div class="radar-wave wave-2"></div>
+          <div class="radar-wave wave-3"></div>
+        </div>
+        <button class="voice-mic-main-btn" id="voiceMicBtn" onclick="window.app.triggerVoiceAiInteraction()" title="Tap to Speak with AI">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </button>
+      </div>
+
+      <!-- AI Response Feedback Box -->
+      <div class="ai-response-box" id="aiResponseBox">
+        <div class="ai-avatar-chip">🤖 AI Coach</div>
+        <p class="ai-message-text" id="aiMessageText">
+          Ready to train! Select any prompt below or tap the microphone to ask anything about workouts, diet, or recovery.
+        </p>
+        <div id="aiActionSlot" class="ai-action-slot"></div>
+      </div>
+
+      <!-- Quick Prompt Suggestion Pills (Screen 3) -->
+      <div class="ai-prompt-pills-wrap">
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('plan_workout')">⚡ Plan my workout</button>
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('give_challenge')">🔥 Give me a challenge</button>
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('what_eat')">🥗 What should I eat?</button>
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('strength_routine')">🏋️ Full Body Strength</button>
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('set_goal')">🎯 Set today's goal</button>
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('recovery_tips')">💤 Recovery tips</button>
+        <button class="prompt-pill" onclick="window.app.askAiPrompt('show_progress')">📊 Show my progress</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ======================================================================
        MOBILE DRAWER MENU

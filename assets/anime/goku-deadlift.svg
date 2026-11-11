@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gymBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141920"/>
+      <stop offset="60%" stop-color="#101318"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </linearGradient>
+    <linearGradient id="auraGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f36100" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#ffb703" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd5b0"/>
+      <stop offset="100%" stop-color="#e09f67"/>
+    </linearGradient>
+    <linearGradient id="giOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b00"/>
+      <stop offset="50%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="giBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="plateMetal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="kiGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Gym Background Grid & Mirrors -->
+  <rect width="500" height="620" fill="url(#gymBg)"/>
+  
+  <!-- Mirror wall panels -->
+  <line x1="80" y1="0" x2="80" y2="450" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+  <line x1="250" y1="0" x2="250" y2="450" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+  <line x1="420" y1="0" x2="420" y2="450" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+  <line x1="0" y1="220" x2="500" y2="220" stroke="rgba(255,255,255,0.04)" stroke-width="1.5"/>
+
+  <!-- Gym Dumbbell Rack in background -->
+  <rect x="390" y="160" width="90" height="320" rx="6" fill="#181e28" stroke="#334155" stroke-width="2"/>
+  <rect x="375" y="190" width="120" height="12" rx="3" fill="#0f172a"/>
+  <rect x="375" y="260" width="120" height="12" rx="3" fill="#0f172a"/>
+  <rect x="375" y="330" width="120" height="12" rx="3" fill="#0f172a"/>
+  <rect x="375" y="400" width="120" height="12" rx="3" fill="#0f172a"/>
+
+  <!-- Gym Platform Floor -->
+  <polygon points="0,460 500,460 500,620 0,620" fill="#0f141c"/>
+  <line x1="0" y1="460" x2="500" y2="460" stroke="#f36100" stroke-width="2.5"/>
+  <line x1="60" y1="460" x2="10" y2="620" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+  <line x1="440" y1="460" x2="490" y2="620" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+
+  <!-- Ki Energy Aura Silhouette -->
+  <ellipse cx="250" cy="300" rx="140" ry="200" fill="url(#auraGlow)" filter="url(#kiGlow)"/>
+
+  <!-- GOKU CHARACTER BODY -->
+  <g id="goku_character">
+    <!-- Spiky Hair -->
+    <path d="M 250,70 
+             C 240,40 220,15 190,10 
+             C 210,35 220,55 215,80 
+             C 185,45 155,40 130,50
+             C 155,75 175,95 180,120
+             C 150,110 130,125 120,145
+             C 150,145 170,155 185,170
+             C 195,120 230,85 250,70 Z" fill="#0c0e12"/>
+    <path d="M 250,70 
+             C 260,40 280,15 310,10 
+             C 290,35 280,55 285,80 
+             C 315,45 345,40 370,50
+             C 345,75 325,95 320,120
+             C 350,110 370,125 380,145
+             C 350,145 330,155 315,170
+             C 305,120 270,85 250,70 Z" fill="#0c0e12"/>
+    <path d="M 215,80 C 235,50 265,50 285,80 C 275,100 225,100 215,80 Z" fill="#181c24"/>
+    <path d="M 230,75 C 240,60 250,60 270,75 C 260,90 240,90 230,75 Z" fill="#0c0e12"/>
+
+    <!-- Head & Face -->
+    <polygon points="215,120 285,120 270,175 250,195 230,175" fill="url(#skin)"/>
+    <path d="M 225,125 Q 238,118 248,125" stroke="#111" stroke-width="4" fill="none"/>
+    <path d="M 252,125 Q 262,118 275,125" stroke="#111" stroke-width="4" fill="none"/>
+    <!-- Intense Eyes -->
+    <polygon points="230,132 245,130 242,138 232,138" fill="#111"/>
+    <polygon points="255,130 270,132 268,138 258,138" fill="#111"/>
+    <circle cx="238" cy="134" r="2.5" fill="#fff"/>
+    <circle cx="262" cy="134" r="2.5" fill="#fff"/>
+    <!-- Nose & Determined Mouth -->
+    <line x1="250" y1="140" x2="248" y2="155" stroke="#9a3412" stroke-width="2.5"/>
+    <line x1="242" y1="168" x2="258" y2="168" stroke="#111" stroke-width="3"/>
+    <line x1="245" y1="172" x2="255" y2="172" stroke="#9a3412" stroke-width="1.5"/>
+
+    <!-- Muscular Neck & Traps -->
+    <polygon points="225,185 275,185 295,215 205,215" fill="url(#skin)"/>
+    <path d="M 195,210 Q 215,190 230,185" stroke="#9a3412" stroke-width="3" fill="none"/>
+    <path d="M 305,210 Q 285,190 270,185" stroke="#9a3412" stroke-width="3" fill="none"/>
+
+    <!-- Deltoids / Massive Shoulders -->
+    <ellipse cx="170" cy="235" rx="35" ry="30" fill="url(#skin)"/>
+    <ellipse cx="330" cy="235" rx="35" ry="30" fill="url(#skin)"/>
+
+    <!-- Biceps & Forearms gripping barbell -->
+    <ellipse cx="160" cy="290" rx="26" ry="36" fill="url(#skin)"/>
+    <ellipse cx="340" cy="290" rx="26" ry="36" fill="url(#skin)"/>
+    <!-- Blue Wristbands -->
+    <rect x="145" y="325" width="28" height="28" rx="4" fill="url(#giBlue)"/>
+    <rect x="327" y="325" width="28" height="28" rx="4" fill="url(#giBlue)"/>
+    <!-- Gripping Hands -->
+    <circle cx="158" cy="365" r="16" fill="url(#skin)"/>
+    <circle cx="342" cy="365" r="16" fill="url(#skin)"/>
+
+    <!-- Orange Gi Torso & Blue Undershirt -->
+    <polygon points="205,215 295,215 315,310 185,310" fill="url(#giOrange)"/>
+    <!-- Blue Chest Undershirt V -->
+    <polygon points="230,215 270,215 250,270" fill="url(#giBlue)"/>
+    <!-- Defined Pecs lines -->
+    <path d="M 215,250 Q 235,270 250,270 Q 265,270 285,250" stroke="#c2410c" stroke-width="3" fill="none"/>
+    <line x1="250" y1="270" x2="250" y2="310" stroke="#c2410c" stroke-width="3"/>
+
+    <!-- Blue Belt / Sash -->
+    <rect x="180" y="310" width="140" height="24" rx="4" fill="url(#giBlue)"/>
+    <path d="M 235,334 L 225,385 L 245,385 Z" fill="url(#giBlue)"/>
+    <path d="M 245,334 L 255,395 L 235,395 Z" fill="url(#giBlue)"/>
+
+    <!-- Muscular Legs in Orange Gi Pants (Deadlift Stance) -->
+    <path d="M 185,334 L 160,490 L 225,490 L 240,360 Z" fill="url(#giOrange)"/>
+    <path d="M 315,334 L 340,490 L 275,490 L 260,360 Z" fill="url(#giOrange)"/>
+    <!-- Pant folds -->
+    <path d="M 180,380 Q 200,400 175,430" stroke="#9a3412" stroke-width="2.5" fill="none"/>
+    <path d="M 320,380 Q 300,400 325,430" stroke="#9a3412" stroke-width="2.5" fill="none"/>
+
+    <!-- Blue/Red Athletic Combat Boots -->
+    <rect x="155" y="490" width="65" height="40" rx="6" fill="url(#giBlue)"/>
+    <rect x="150" y="525" width="75" height="18" rx="4" fill="#0f172a"/>
+    <line x1="187" y1="490" x2="187" y2="525" stroke="#ef4444" stroke-width="3"/>
+
+    <rect x="280" y="490" width="65" height="40" rx="6" fill="url(#giBlue)"/>
+    <rect x="275" y="525" width="75" height="18" rx="4" fill="#0f172a"/>
+    <line x1="312" y1="490" x2="312" y2="525" stroke="#ef4444" stroke-width="3"/>
+  </g>
+
+  <!-- HEAVY OLYMPIC BARBELL & PLATES (In Hands) -->
+  <g id="olympic_barbell">
+    <!-- Steel Bar -->
+    <rect x="30" y="360" width="440" height="12" rx="3" fill="#cbd5e1" stroke="#475569" stroke-width="2"/>
+    <line x1="50" y1="366" x2="450" y2="366" stroke="#ffffff" stroke-width="2"/>
+
+    <!-- Left Plate Stack -->
+    <rect x="55" y="270" width="22" height="190" rx="6" fill="url(#plateMetal)" stroke="#334155" stroke-width="2"/>
+    <rect x="42" y="290" width="16" height="150" rx="5" fill="url(#plateMetal)" stroke="#1e293b" stroke-width="2"/>
+    <rect x="32" y="315" width="12" height="100" rx="4" fill="url(#plateMetal)" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="66" cy="366" r="6" fill="#f36100"/>
+
+    <!-- Right Plate Stack -->
+    <rect x="423" y="270" width="22" height="190" rx="6" fill="url(#plateMetal)" stroke="#334155" stroke-width="2"/>
+    <rect x="442" y="290" width="16" height="150" rx="5" fill="url(#plateMetal)" stroke="#1e293b" stroke-width="2"/>
+    <rect x="456" y="315" width="12" height="100" rx="4" fill="url(#plateMetal)" stroke="#0f172a" stroke-width="2"/>
+    <circle cx="434" cy="366" r="6" fill="#f36100"/>
+
+    <!-- Barbell Collar Rings -->
+    <rect x="77" y="354" width="10" height="24" rx="2" fill="#64748b"/>
+    <rect x="413" y="354" width="10" height="24" rx="2" fill="#64748b"/>
+  </g>
+
+  <!-- Energy Chalk Sparkles & Aura FX -->
+  <circle cx="158" cy="360" r="3" fill="#ffedd5" opacity="0.8"/>
+  <circle cx="342" cy="360" r="3" fill="#ffedd5" opacity="0.8"/>
+  <circle cx="170" cy="380" r="2" fill="#f36100" opacity="0.9"/>
+  <circle cx="330" cy="380" r="2" fill="#f36100" opacity="0.9"/>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="100%" height="100%">
+  <defs>
+    <linearGradient id="warmBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141a24"/>
+      <stop offset="100%" stop-color="#0b0e14"/>
+    </linearGradient>
+    <linearGradient id="warmAura" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="giOrange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b00"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd5b0"/>
+      <stop offset="100%" stop-color="#e09f67"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="500" height="620" fill="url(#warmBg)"/>
+  <circle cx="250" cy="300" r="180" fill="url(#warmAura)"/>
+
+  <!-- Stretching Pose: High Kick / Side Lunge -->
+  <g id="warmup_stretch">
+    <!-- Spiky Hair -->
+    <path d="M 230,100 C 210,60 170,40 140,50 C 165,75 180,100 180,130 C 150,130 130,150 120,170 C 160,170 180,180 200,200 Z" fill="#0f172a"/>
+    <path d="M 230,100 C 250,60 290,40 320,50 C 295,75 280,100 280,130 C 310,130 330,150 340,170 C 300,170 280,180 260,200 Z" fill="#0f172a"/>
+    <!-- Head -->
+    <polygon points="200,140 260,140 250,190 230,205 210,190" fill="url(#skin)"/>
+    <!-- Confident Smile -->
+    <path d="M 220,180 Q 230,190 240,180" stroke="#111" stroke-width="2.5" fill="none"/>
+
+    <!-- Torso leaning into lunge stretch -->
+    <polygon points="190,205 270,205 285,310 175,310" fill="url(#giOrange)"/>
+    <!-- Arms stretched wide overhead -->
+    <path d="M 180,210 L 110,150 L 95,165 L 170,230 Z" fill="url(#skin)"/>
+    <path d="M 280,210 L 350,150 L 365,165 L 290,230 Z" fill="url(#skin)"/>
+
+    <!-- Wide Mobility Lunge Legs -->
+    <path d="M 180,310 L 80,480 L 130,500 L 220,340 Z" fill="url(#giOrange)"/>
+    <path d="M 270,310 L 400,480 L 350,500 L 240,340 Z" fill="url(#giOrange)"/>
+
+    <!-- Boots on mat -->
+    <rect x="60" y="480" width="70" height="35" rx="6" fill="#1d4ed8"/>
+    <rect x="350" y="480" width="70" height="35" rx="6" fill="#1d4ed8"/>
+  </g>
+</svg>
