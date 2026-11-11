@@ -51,6 +51,9 @@ class AppController {
     // 5. Initialize Tracker active tab
     const hasActiveSession = window.appState && window.appState.getActiveSession();
     this.switchTrackerTab(hasActiveSession ? "workout" : "dashboard");
+
+    // 6. Initialize Animated Hero Canvas Particles
+    this.initHeroParticles();
   }
 
   // --- GYMLIFE DYNAMIC SECTIONS RENDERING ---
@@ -383,6 +386,121 @@ class AppController {
     setTimeout(() => {
       window.historyLogs.toggleExpand(logId);
     }, 300);
+  }
+
+  // --- HERO WORKOUT ANIMATIONS & PARTICLES ---
+  initHeroParticles() {
+    const canvas = document.getElementById("heroParticlesCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = (canvas.width = canvas.offsetWidth || window.innerWidth);
+    let height = (canvas.height = canvas.offsetHeight || 600);
+
+    const onResize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth || window.innerWidth;
+      height = canvas.height = canvas.offsetHeight || 600;
+    };
+    window.addEventListener("resize", onResize);
+
+    const particleCount = Math.min(45, Math.floor(width / 30));
+    const particles = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2.2 + 0.8,
+        speedY: Math.random() * 0.7 + 0.3,
+        speedX: (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.55 + 0.2,
+        pulseSpeed: Math.random() * 0.02 + 0.01,
+        color: Math.random() > 0.3 ? "#f36100" : "#ff9933"
+      });
+    }
+
+    let isVisible = true;
+    const heroSec = document.getElementById("home");
+    if (heroSec && "IntersectionObserver" in window) {
+      const obs = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+      }, { threshold: 0.1 });
+      obs.observe(heroSec);
+    }
+
+    const animate = () => {
+      if (isVisible) {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.y -= p.speedY;
+          p.x += p.speedX;
+          p.alpha += Math.sin(Date.now() * p.pulseSpeed) * 0.01;
+
+          if (p.y < -10) {
+            p.y = height + 10;
+            p.x = Math.random() * width;
+          }
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+
+          ctx.save();
+          ctx.globalAlpha = Math.max(0.1, Math.min(0.8, p.alpha));
+          ctx.fillStyle = p.color;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }
+
+  switchHeroExercise(exerciseId, btnEl) {
+    if (!window.appState) return;
+    const ex = window.appState.getExerciseById(exerciseId);
+    if (!ex) return;
+
+    if (btnEl) {
+      document.querySelectorAll(".hero-switcher-chips .chip-btn").forEach((b) => b.classList.remove("active"));
+      btnEl.classList.add("active");
+    }
+
+    const img = document.getElementById("heroExerciseVideo");
+    const title = document.getElementById("heroExerciseTitle");
+    const sub = document.getElementById("heroExerciseSub");
+    const muscle = document.getElementById("heroExerciseMuscle");
+
+    if (img) {
+      img.style.opacity = "0.3";
+      setTimeout(() => {
+        img.src = ex.gifUrl || "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-bench-press.gif";
+        img.style.opacity = "1";
+      }, 150);
+    }
+
+    if (title) title.textContent = ex.name;
+    if (sub) sub.textContent = `${ex.defaultSets || 3} Sets • ${ex.defaultReps || 10} Reps • ${ex.restSeconds || 60}s Rest`;
+    if (muscle) muscle.textContent = `${ex.muscleGroup} • ${ex.equipment}`;
+  }
+
+  startQuickWorkout(event) {
+    if (event) event.preventDefault();
+    let session = window.appState.getActiveSession();
+    if (!session) {
+      window.workoutSession.startNewSession();
+    } else {
+      this.switchTrackerTab("workout");
+    }
+    this.scrollToSection("tracker");
   }
 
   // --- MOBILE DRAWER ---

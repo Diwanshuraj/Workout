@@ -365,55 +365,115 @@ a:hover {
 }
 
 /* ==========================================================================
-   HERO BANNER (GymLife Full Banner Style)
+   ANIMATED HIGH-VOLTAGE WORKOUT HERO SECTION
    ========================================================================== */
 .hero-gymlife-section {
   position: relative;
-  min-height: 80vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.7) 0%, rgba(21, 21, 21, 0.95) 100%),
-              radial-gradient(ellipse at 80% 20%, rgba(243, 97, 0, 0.18) 0%, rgba(10, 10, 10, 0) 65%);
-  padding: 80px 0;
+  background: radial-gradient(ellipse at 85% 25%, rgba(243, 97, 0, 0.22) 0%, rgba(10, 10, 10, 0) 60%),
+              radial-gradient(ellipse at 15% 85%, rgba(243, 97, 0, 0.12) 0%, rgba(10, 10, 10, 0) 50%),
+              linear-gradient(180deg, #070707 0%, #111111 50%, #0a0a0a 100%);
+  padding: 100px 0 70px;
   overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
 }
 
+.hero-particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-container-relative {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.hero-gymlife-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-gymlife-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 60px;
+  }
+}
+
+/* Left Hero Column */
 .hero-gymlife-content {
-  max-width: 700px;
+  max-width: 680px;
 }
 
-.hero-tagline {
-  display: inline-block;
+.hero-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(243, 97, 0, 0.1);
+  border: 1px solid rgba(243, 97, 0, 0.35);
+  padding: 6px 14px;
+  border-radius: 50px;
   font-family: var(--font-heading);
-  color: var(--primary-color);
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  margin-bottom: 14px;
+  letter-spacing: 0.12em;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(243, 97, 0, 0.15);
 }
 
 .hero-gymlife-title {
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   font-weight: 800;
   line-height: 1.08;
   margin-bottom: 20px;
   letter-spacing: 0.02em;
+  color: var(--text-white);
 }
 
-.hero-gymlife-title span {
-  color: var(--primary-color);
-}
-
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .hero-gymlife-title {
-    font-size: 4.6rem;
+    font-size: 3.8rem;
   }
+}
+
+@media (min-width: 1024px) {
+  .hero-gymlife-title {
+    font-size: 4.5rem;
+  }
+}
+
+.glow-text {
+  color: var(--primary-color);
+  text-shadow: 0 0 25px rgba(243, 97, 0, 0.6);
+}
+
+.hero-highlight-word {
+  background: linear-gradient(135deg, #f36100 0%, #ff8833 50%, #f36100 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineGradient 4s linear infinite;
+}
+
+@keyframes shineGradient {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .hero-gymlife-desc {
   font-size: 1.05rem;
   color: var(--text-gray);
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   line-height: 1.7;
 }
 
@@ -421,6 +481,348 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  margin-bottom: 35px;
+}
+
+/* Pulsing Main CTA button */
+.btn-pulse-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(243, 97, 0, 0.45);
+}
+
+.btn-pulse-action::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid var(--primary-color);
+  opacity: 0.8;
+  animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+/* Live Stats Row */
+.hero-stats-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-stat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-stat-num {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+.hero-stat-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.hero-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Right Column: Interactive Animated Showcase */
+.hero-showcase-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10px;
+}
+
+.hero-interactive-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #111111;
+  border: 1px solid rgba(243, 97, 0, 0.35);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(243, 97, 0, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 3;
+}
+
+.hero-interactive-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.9), 0 0 45px rgba(243, 97, 0, 0.3);
+}
+
+.hero-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #0a0a0a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: 0.05em;
+}
+
+.hero-pill-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background: rgba(243, 97, 0, 0.15);
+  border: 1px solid rgba(243, 97, 0, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.hero-video-frame {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background: #000000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.hero-video-overlay-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+  padding: 16px 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hero-ex-info h4 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+
+.hero-ex-info span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.hero-play-action-btn {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.hero-play-action-btn:hover {
+  background: var(--primary-hover);
+  transform: translateX(2px);
+}
+
+.hero-switcher-chips {
+  display: flex;
+  gap: 6px;
+  padding: 12px 14px;
+  background: #0d0d0d;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hero-switcher-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-gray);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.chip-btn:hover {
+  color: var(--text-white);
+  border-color: rgba(243, 97, 0, 0.4);
+}
+
+.chip-btn.active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #ffffff;
+}
+
+/* Floating Athletic Metric Badges */
+.floating-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(18, 18, 18, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.badge-top-left {
+  top: 10px;
+  left: -20px;
+}
+
+.badge-top-right {
+  top: 25px;
+  right: -25px;
+}
+
+.badge-bottom-left {
+  bottom: 20px;
+  left: -20px;
+}
+
+.badge-bottom-right {
+  bottom: 15px;
+  right: -20px;
+}
+
+@media (max-width: 768px) {
+  .badge-top-left { left: 0px; top: -10px; }
+  .badge-top-right { right: 0px; top: -10px; }
+  .badge-bottom-left { display: none; }
+  .badge-bottom-right { display: none; }
+}
+
+.badge-icon-flame, .badge-icon-heart, .badge-icon-trophy, .badge-icon-star {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-heart {
+  animation: heartPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.3); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+
+.badge-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-val {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.1;
+}
+
+.badge-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Floating Oscillations */
+.float-anim-1 {
+  animation: float1 4s ease-in-out infinite;
+}
+
+.float-anim-2 {
+  animation: float2 4.5s ease-in-out infinite 0.5s;
+}
+
+.float-anim-3 {
+  animation: float1 4.2s ease-in-out infinite 1s;
+}
+
+.float-anim-4 {
+  animation: float2 4.8s ease-in-out infinite 1.5s;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(10px); }
 }
 
 /* ==========================================================================

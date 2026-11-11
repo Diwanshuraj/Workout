@@ -76,23 +76,134 @@
   </header>
 
   <!-- ======================================================================
-       PAGE SECTION 1: HERO BANNER (GymLife Fullscreen Banner)
+       PAGE SECTION 1: HERO BANNER (Animated Kinetic Workout Hero)
        ====================================================================== -->
   <section id="home" class="hero-gymlife-section" data-nav="home">
-    <div class="container">
-      <div class="hero-gymlife-content">
-        <span class="hero-tagline">SHAPE YOUR BODY</span>
-        <h1 class="hero-gymlife-title">BE <span>STRONG</span> TRAINING HARD</h1>
-        <p class="hero-gymlife-desc">
-          Push your athletic limits with state-of-the-art training splits, professional coaching guidance, and dynamic live set tracking.
-        </p>
-        <div class="hero-buttons-row">
-          <button class="btn-gymlife" onclick="window.app.scrollToSection('tracker', event)">
-            Start Training
-          </button>
-          <button class="btn-gymlife btn-gymlife-outline" onclick="window.app.scrollToSection('classes', event)">
-            Explore Classes
-          </button>
+    <canvas id="heroParticlesCanvas" class="hero-particles-canvas"></canvas>
+
+    <div class="container hero-container-relative">
+      <div class="hero-gymlife-grid">
+        <!-- Left: Athletic Headline & CTAs -->
+        <div class="hero-gymlife-content">
+          <div class="hero-badge-pill">
+            <span class="pulse-dot"></span>
+            <span>NEXT-GEN WORKOUT TRACKER & FORM COACH</span>
+          </div>
+
+          <h1 class="hero-gymlife-title">
+            BE <span class="glow-text">STRONG</span><br />
+            TRAIN WITH <span class="hero-highlight-word">PASSION</span>
+          </h1>
+
+          <p class="hero-gymlife-desc">
+            Push beyond your limits with <strong>52+ live animated workout demonstrations</strong>, scientific hypertrophy splits, intelligent rest timers with audio beeps, and automated progressive overload logs.
+          </p>
+
+          <div class="hero-buttons-row">
+            <button class="btn-gymlife btn-pulse-action" onclick="window.app.startQuickWorkout(event)">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>Start Workout Now</span>
+            </button>
+            <button class="btn-gymlife btn-gymlife-outline" onclick="window.app.switchTrackerTab('exercises'); window.app.scrollToSection('tracker', event)">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              <span>Explore 52+ Videos</span>
+            </button>
+          </div>
+
+          <!-- Live Animated Metric Highlights -->
+          <div class="hero-stats-row">
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">52+</span>
+              <span class="hero-stat-sub">Animated Demos</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">100%</span>
+              <span class="hero-stat-sub">Dynamic Engine</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">0&#8377;</span>
+              <span class="hero-stat-sub">Completely Free</span>
+            </div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-box">
+              <span class="hero-stat-num">Pro</span>
+              <span class="hero-stat-sub">Rest Timers & Audio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Live Workout Showcase & Floating Badges -->
+        <div class="hero-showcase-wrap">
+          <!-- Floating Badge Top Left: Calories -->
+          <div class="floating-badge badge-top-left float-anim-1">
+            <div class="badge-icon-flame">🔥</div>
+            <div class="badge-text-group">
+              <span class="badge-val">680 KCAL</span>
+              <span class="badge-label">Active Burn</span>
+            </div>
+          </div>
+
+          <!-- Floating Badge Top Right: Heart Rate -->
+          <div class="floating-badge badge-top-right float-anim-2">
+            <div class="badge-icon-heart pulse-heart">❤️</div>
+            <div class="badge-text-group">
+              <span class="badge-val">146 BPM</span>
+              <span class="badge-label">Peak Intensity</span>
+            </div>
+          </div>
+
+          <!-- Main Interactive Workout Display Card -->
+          <div class="hero-interactive-card">
+            <div class="hero-card-header">
+              <div class="card-status-indicator">
+                <span class="pulse-dot"></span>
+                <span id="heroExerciseStatus">LIVE FORM DEMONSTRATION</span>
+              </div>
+              <span class="hero-pill-badge" id="heroExerciseMuscle">Chest &bull; Barbell</span>
+            </div>
+
+            <div class="hero-video-frame">
+              <img id="heroExerciseVideo" src="https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-bench-press.gif" alt="Workout Demonstration" class="hero-video-img" />
+              <div class="hero-video-overlay-bar">
+                <div class="hero-ex-info">
+                  <h4 id="heroExerciseTitle">Barbell Bench Press</h4>
+                  <span id="heroExerciseSub">4 Sets &bull; 8-10 Reps &bull; 90s Rest</span>
+                </div>
+                <button class="hero-play-action-btn" onclick="window.app.addExerciseToWorkout('ex_bench_press'); window.app.switchTrackerTab('workout');" title="Train this movement">
+                  <span>Train Now &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Quick Workout Switcher Chips -->
+            <div class="hero-switcher-chips">
+              <button class="chip-btn active" onclick="window.app.switchHeroExercise('ex_bench_press', this)">Bench Press</button>
+              <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_barbell_squat', this)">Squat</button>
+              <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_barbell_deadlift', this)">Deadlift</button>
+              <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_barbell_curl', this)">Bicep Curl</button>
+              <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_overhead_press', this)">Shoulders</button>
+            </div>
+          </div>
+
+          <!-- Floating Badge Bottom Left: Streak -->
+          <div class="floating-badge badge-bottom-left float-anim-3">
+            <div class="badge-icon-trophy">⚡</div>
+            <div class="badge-text-group">
+              <span class="badge-val">7 DAYS</span>
+              <span class="badge-label">Active Streak</span>
+            </div>
+          </div>
+
+          <!-- Floating Badge Bottom Right: PR Record -->
+          <div class="floating-badge badge-bottom-right float-anim-4">
+            <div class="badge-icon-star">🏆</div>
+            <div class="badge-text-group">
+              <span class="badge-val">NEW PR</span>
+              <span class="badge-label">Personal Best</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
