@@ -4106,3 +4106,291 @@ svg.icon-lg, .icon-lg {
   color: var(--text-muted);
 }
 
+/* ==========================================================================
+   ADVANCED ATHLETIC ANIMATIONS & LIVE TELEMETRY
+   ========================================================================== */
+
+/* 1. Infinite Athletic Marquee Running Ticker */
+.marquee-ticker-wrap {
+  background: #000000;
+  border-top: 1px solid rgba(243, 97, 0, 0.4);
+  border-bottom: 1px solid rgba(243, 97, 0, 0.4);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 14px 0;
+  position: relative;
+  box-shadow: 0 0 25px rgba(243, 97, 0, 0.15);
+  z-index: 10;
+}
+
+.marquee-ticker-track {
+  display: inline-flex;
+  gap: 36px;
+  animation: marqueeRoll 25s linear infinite;
+  will-change: transform;
+}
+
+.marquee-ticker-wrap:hover .marquee-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeRoll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-item {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticker-icon {
+  color: var(--primary-color);
+  font-size: 1.15rem;
+  filter: drop-shadow(0 0 6px rgba(243, 97, 0, 0.6));
+}
+
+/* 2. Hero Live Telemetry & ECG Monitor */
+.hero-live-telemetry {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #090909;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.telemetry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+.telemetry-title {
+  color: var(--text-muted);
+}
+
+.telemetry-live-tag {
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.telemetry-intensity-tag {
+  color: #ff9933;
+  font-size: 0.65rem;
+}
+
+.ecg-wave-container {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+  border: 1px solid rgba(243, 97, 0, 0.3);
+  overflow: hidden;
+}
+
+.ecg-svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.ecg-path {
+  fill: none;
+  stroke: var(--primary-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: ecgBeat 2.2s linear infinite;
+}
+
+@keyframes ecgBeat {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ecg-scanline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(90deg, transparent, rgba(243, 97, 0, 0.45), transparent);
+  animation: scanlineMove 2.2s linear infinite;
+}
+
+@keyframes scanlineMove {
+  0% {
+    left: -30px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* 3. Equalizer Tempo Bars */
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 32px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+  border: 1px solid rgba(243, 97, 0, 0.3);
+}
+
+.eq-bar {
+  flex: 1;
+  background: var(--primary-color);
+  border-radius: 2px;
+  min-height: 4px;
+  animation: eqJump 0.8s ease-in-out infinite alternate;
+}
+
+.bar-1 { animation-delay: 0.1s; animation-duration: 0.6s; }
+.bar-2 { animation-delay: 0.3s; animation-duration: 0.9s; }
+.bar-3 { animation-delay: 0.2s; animation-duration: 0.7s; }
+.bar-4 { animation-delay: 0.5s; animation-duration: 1.0s; }
+.bar-5 { animation-delay: 0.15s; animation-duration: 0.8s; }
+.bar-6 { animation-delay: 0.4s; animation-duration: 0.65s; }
+.bar-7 { animation-delay: 0.25s; animation-duration: 0.85s; }
+.bar-8 { animation-delay: 0.35s; animation-duration: 0.75s; }
+
+@keyframes eqJump {
+  0% {
+    height: 15%;
+    opacity: 0.4;
+  }
+  100% {
+    height: 95%;
+    opacity: 1;
+    filter: drop-shadow(0 0 5px var(--primary-color));
+  }
+}
+
+/* 4. Conic-Gradient Rotating Laser Border on Featured Pricing Card */
+.pricing-card.featured-pricing-glow {
+  position: relative;
+  border: 1px solid transparent !important;
+  z-index: 1;
+  box-shadow: 0 10px 40px rgba(243, 97, 0, 0.35);
+}
+
+.pricing-card.featured-pricing-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(from 0deg at 50% 50%, #f36100, #ff9933, #0a0a0a, #f36100);
+  animation: rotateBorder 4s linear infinite;
+  z-index: -2;
+}
+
+.pricing-card.featured-pricing-glow::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: var(--bg-card);
+  z-index: -1;
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 5. Scroll-Triggered Reveal Animations */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 6. Button Shimmer Light Reflection */
+.hero-primary-cta,
+.btn-primary.btn-lg {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-primary-cta::after,
+.btn-primary.btn-lg::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: rotate(25deg) translateY(-150%);
+  animation: ctaShimmer 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ctaShimmer {
+  0%, 70% {
+    transform: rotate(25deg) translateY(-150%);
+  }
+  100% {
+    transform: rotate(25deg) translateY(150%);
+  }
+}
+
+/* 7. Enhanced Card Hover Elevation & Glow */
+.chooseus-card,
+.class-card,
+.trainer-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.chooseus-card:hover,
+.class-card:hover,
+.trainer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(243, 97, 0, 0.18);
+  border-color: rgba(243, 97, 0, 0.6);
+}
+

@@ -185,6 +185,39 @@
               <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_barbell_curl', this)">Bicep Curl</button>
               <button class="chip-btn" onclick="window.app.switchHeroExercise('ex_overhead_press', this)">Shoulders</button>
             </div>
+
+            <!-- Live Workout Telemetry & ECG Monitor -->
+            <div class="hero-live-telemetry">
+              <div class="telemetry-item">
+                <div class="telemetry-header">
+                  <span class="telemetry-title">LIVE ECG WAVE</span>
+                  <span class="telemetry-live-tag"><span class="pulse-dot"></span> <span id="heroTelemetryBpm">146</span> BPM</span>
+                </div>
+                <div class="ecg-wave-container">
+                  <svg class="ecg-svg" viewBox="0 0 300 40" preserveAspectRatio="none">
+                    <path class="ecg-path" d="M 0,20 L 40,20 L 50,10 L 60,30 L 70,5 L 80,35 L 90,20 L 140,20 L 150,10 L 160,30 L 170,5 L 180,35 L 190,20 L 240,20 L 250,10 L 260,30 L 270,5 L 280,35 L 290,20 L 300,20" />
+                  </svg>
+                  <div class="ecg-scanline"></div>
+                </div>
+              </div>
+
+              <div class="telemetry-item">
+                <div class="telemetry-header">
+                  <span class="telemetry-title">INTENSITY EQUALIZER</span>
+                  <span class="telemetry-intensity-tag">ZONE 4 &bull; HARD</span>
+                </div>
+                <div class="equalizer-bars">
+                  <div class="eq-bar bar-1"></div>
+                  <div class="eq-bar bar-2"></div>
+                  <div class="eq-bar bar-3"></div>
+                  <div class="eq-bar bar-4"></div>
+                  <div class="eq-bar bar-5"></div>
+                  <div class="eq-bar bar-6"></div>
+                  <div class="eq-bar bar-7"></div>
+                  <div class="eq-bar bar-8"></div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Floating Badge Bottom Left: Streak -->
@@ -210,6 +243,31 @@
   </section>
 
   <!-- ======================================================================
+       INFINITE ATHLETIC MARQUEE RUNNING TICKER
+       ====================================================================== -->
+  <div class="marquee-ticker-wrap">
+    <div class="marquee-ticker-track">
+      <span class="ticker-item"><span class="ticker-icon">⚡</span> NO SHORTCUTS JUST HARD WORK</span>
+      <span class="ticker-item"><span class="ticker-icon">🔥</span> 52+ LIVE ANIMATED EXERCISES</span>
+      <span class="ticker-item"><span class="ticker-icon">🏋️</span> REAL-TIME WORKOUT TRACKER</span>
+      <span class="ticker-item"><span class="ticker-icon">🏆</span> SMASH YOUR PERSONAL RECORDS</span>
+      <span class="ticker-item"><span class="ticker-icon">⏱️</span> SMART REST TIMERS & AUDIO BEEPS</span>
+      <span class="ticker-item"><span class="ticker-icon">📊</span> SCIENTIFIC OVERLOAD ANALYTICS</span>
+      <span class="ticker-item"><span class="ticker-icon">⚡</span> BUILD ATHLETIC POWER</span>
+      <span class="ticker-item"><span class="ticker-icon">🔥</span> ZERO SUBSCRIPTIONS &bull; 100% FREE</span>
+      <!-- Duplicate for seamless infinite loop -->
+      <span class="ticker-item"><span class="ticker-icon">⚡</span> NO SHORTCUTS JUST HARD WORK</span>
+      <span class="ticker-item"><span class="ticker-icon">🔥</span> 52+ LIVE ANIMATED EXERCISES</span>
+      <span class="ticker-item"><span class="ticker-icon">🏋️</span> REAL-TIME WORKOUT TRACKER</span>
+      <span class="ticker-item"><span class="ticker-icon">🏆</span> SMASH YOUR PERSONAL RECORDS</span>
+      <span class="ticker-item"><span class="ticker-icon">⏱️</span> SMART REST TIMERS & AUDIO BEEPS</span>
+      <span class="ticker-item"><span class="ticker-icon">📊</span> SCIENTIFIC OVERLOAD ANALYTICS</span>
+      <span class="ticker-item"><span class="ticker-icon">⚡</span> BUILD ATHLETIC POWER</span>
+      <span class="ticker-item"><span class="ticker-icon">🔥</span> ZERO SUBSCRIPTIONS &bull; 100% FREE</span>
+    </div>
+  </div>
+
+  <!-- ======================================================================
        PAGE SECTION 2: ABOUT / CHOOSE US (Why Choose Us)
        ====================================================================== -->
   <section id="about" class="page-section page-section-alt" data-nav="about">
@@ -220,7 +278,7 @@
       </div>
 
       <div class="chooseus-grid">
-        <div class="chooseus-card">
+        <div class="chooseus-card reveal-item">
           <div class="chooseus-icon-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
           </div>
@@ -228,7 +286,7 @@
           <p class="chooseus-desc">Access cutting-edge Olympic bars, precision cables, dumbbells, and state-of-the-art plate loaded machines.</p>
         </div>
 
-        <div class="chooseus-card">
+        <div class="chooseus-card reveal-item">
           <div class="chooseus-icon-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
           </div>
@@ -236,7 +294,7 @@
           <p class="chooseus-desc">Fuel your metabolism with science-backed macro splits, calorie targets, and dynamic nutritional guidance.</p>
         </div>
 
-        <div class="chooseus-card">
+        <div class="chooseus-card reveal-item">
           <div class="chooseus-icon-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
@@ -244,7 +302,7 @@
           <p class="chooseus-desc">Proven periodization models: Push/Pull/Legs, Upper/Lower, and high-intensity metabolic conditioning.</p>
         </div>
 
-        <div class="chooseus-card">
+        <div class="chooseus-card reveal-item">
           <div class="chooseus-icon-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>

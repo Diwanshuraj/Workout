@@ -54,6 +54,11 @@ class AppController {
 
     // 6. Initialize Animated Hero Canvas Particles
     this.initHeroParticles();
+
+    // 7. Setup Advanced Animations (Scroll Reveal, Counter, Telemetry)
+    this.setupScrollAnimations();
+    this.setupCounterAnimation();
+    this.setupTelemetrySimulation();
   }
 
   // --- GYMLIFE DYNAMIC SECTIONS RENDERING ---
@@ -63,7 +68,7 @@ class AppController {
 
     grid.innerHTML = GYMLIFE_CLASSES.map(
       (cls) => `
-      <div class="class-card">
+      <div class="class-card reveal-item">
         <span class="class-header-badge">${Helpers.escapeHtml(cls.badge)}</span>
         <h3 class="class-title">${Helpers.escapeHtml(cls.title)}</h3>
         <p class="class-desc">${Helpers.escapeHtml(cls.desc)}</p>
@@ -87,7 +92,7 @@ class AppController {
 
     grid.innerHTML = GYMLIFE_PRICING.map(
       (plan) => `
-      <div class="pricing-card ${plan.popular ? "popular" : ""}">
+      <div class="pricing-card reveal-item ${plan.popular ? "popular featured-pricing-glow" : ""}">
         <h3 class="pricing-plan-title">${Helpers.escapeHtml(plan.title)}</h3>
         <div class="pricing-price-tag">
           <span>$</span>${plan.price}
@@ -110,7 +115,7 @@ class AppController {
 
     grid.innerHTML = GYMLIFE_TRAINERS.map(
       (tr) => `
-      <div class="trainer-card">
+      <div class="trainer-card reveal-item">
         <div class="trainer-avatar-box">
           ${tr.name.split(" ").map((n) => n[0]).join("")}
         </div>
@@ -516,6 +521,71 @@ class AppController {
     const backdrop = document.getElementById("drawerBackdrop");
     if (drawer) drawer.classList.remove("open");
     if (backdrop) backdrop.classList.add("hidden");
+  }
+
+  // --- ADVANCED ATHLETIC ANIMATIONS ---
+  setupScrollAnimations() {
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal-item").forEach((el) => el.classList.add("is-revealed"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(".reveal-item").forEach((el, idx) => {
+      el.style.transitionDelay = `${(idx % 4) * 0.12}s`;
+      observer.observe(el);
+    });
+  }
+
+  setupCounterAnimation() {
+    if (!("IntersectionObserver" in window)) return;
+
+    const stats = document.querySelectorAll(".hero-stat-num");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const text = el.textContent.trim();
+          if (text.includes("52+")) {
+            let count = 0;
+            const timer = setInterval(() => {
+              count += 2;
+              if (count >= 52) {
+                el.textContent = "52+";
+                clearInterval(timer);
+              } else {
+                el.textContent = count + "+";
+              }
+            }, 35);
+          }
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    stats.forEach((s) => observer.observe(s));
+  }
+
+  setupTelemetrySimulation() {
+    const bpmEl = document.getElementById("heroTelemetryBpm");
+    if (!bpmEl) return;
+
+    setInterval(() => {
+      const variation = Math.floor(Math.random() * 7) - 3;
+      const targetBpm = Math.min(156, Math.max(140, 146 + variation));
+      bpmEl.textContent = targetBpm;
+    }, 2800);
   }
 
   // --- TOAST NOTIFICATIONS ---
