@@ -1,5 +1,5 @@
 /**
- * Dynamic Exercise Database and Default Routines
+ * Dynamic Exercise Database, Routines, and GymLife Fitness Data
  * Completely data-driven: no hardcoded markup in HTML!
  */
 
@@ -63,7 +63,7 @@ const DEFAULT_EXERCISES = [
       "Place hands on the floor slightly wider than shoulder-width.",
       "Extend legs back so your body forms a straight line from crown of head to heels.",
       "Engage your core and squeeze glutes to prevent hip sagging.",
-      "Lower your chest until it hover an inch above the floor.",
+      "Lower your chest until it hovers an inch above the floor.",
       "Push forcefully through the palms to return to top plank position."
     ],
     tips: "Keep your neck neutral and elbows tracking at a 45-degree angle, not flared out 90 degrees."
@@ -217,7 +217,7 @@ const DEFAULT_EXERCISES = [
     tips: "Avoid rocking your torso back and forth to generate momentum."
   },
 
-  // --- LEGS (QUADS, HAMSTRINGS, GLUTES, CALVES) ---
+  // --- LEGS ---
   {
     id: "ex_barbell_squat",
     name: "Barbell Back Squat",
@@ -322,27 +322,6 @@ const DEFAULT_EXERCISES = [
     ],
     tips: "Do not swing the weight; maintain controlled tempo throughout."
   },
-  {
-    id: "ex_standing_calf_raise",
-    name: "Standing Calf Raise",
-    muscleGroup: "Legs",
-    secondaryMuscles: ["Calves", "Soleus"],
-    equipment: "Machine",
-    difficulty: "Beginner",
-    category: "Hypertrophy",
-    caloriesPerMin: 5.0,
-    defaultSets: 4,
-    defaultReps: 15,
-    restSeconds: 45,
-    instructions: [
-      "Place balls of feet on platform edge with heels hanging off freely.",
-      "Rest padded levers comfortably on shoulders and straighten knees.",
-      "Lower heels down as far as possible for a full deep calf stretch.",
-      "Push up onto the tips of your toes as high as possible and pause for 1 second.",
-      "Slowly lower back to full stretch."
-    ],
-    tips: "Avoid bouncing at bottom; pause 1-2 seconds in full stretch for maximum muscle activation."
-  },
 
   // --- SHOULDERS ---
   {
@@ -387,50 +366,8 @@ const DEFAULT_EXERCISES = [
     ],
     tips: "Lead with your elbows, not hands. Avoid swinging torso or using trap momentum."
   },
-  {
-    id: "ex_face_pull",
-    name: "Cable Face Pull",
-    muscleGroup: "Shoulders",
-    secondaryMuscles: ["Rear Delts", "Rotator Cuff", "Rhomboids"],
-    equipment: "Cable",
-    difficulty: "Beginner",
-    category: "Hypertrophy",
-    caloriesPerMin: 5.4,
-    defaultSets: 3,
-    defaultReps: 15,
-    restSeconds: 60,
-    instructions: [
-      "Attach rope accessory to a cable set at upper chest or eye level.",
-      "Grip rope with thumbs pointing backward or palms facing in.",
-      "Step back into a balanced stance with arms extended.",
-      "Pull rope straight toward bridge of nose or forehead, flaring elbows out wide.",
-      "Rotate wrists back at end to achieve external shoulder rotation.",
-      "Hold squeeze for 1 second, then control back to start."
-    ],
-    tips: "Crucial exercise for shoulder health and posture balance against heavy pressing."
-  },
-  {
-    id: "ex_arnold_press",
-    name: "Arnold Dumbbell Press",
-    muscleGroup: "Shoulders",
-    secondaryMuscles: ["Front Delts", "Side Delts", "Triceps"],
-    equipment: "Dumbbell",
-    difficulty: "Intermediate",
-    category: "Hypertrophy",
-    caloriesPerMin: 6.5,
-    defaultSets: 3,
-    defaultReps: 10,
-    restSeconds: 75,
-    instructions: [
-      "Sit on an upright bench holding dumbbells at chest height, palms facing your body.",
-      "As you press overhead, rotate wrists smoothly so palms face forward at top.",
-      "Lock out gently overhead without banging weights.",
-      "Reverse the rotation seamlessly as you lower dumbbells back to starting position."
-    ],
-    tips: "Smooth and continuous rotation ensures constant front and lateral delt recruitment."
-  },
 
-  // --- ARMS (BICEPS, TRICEPS, FOREARMS) ---
+  // --- ARMS ---
   {
     id: "ex_barbell_curl",
     name: "Standing Barbell Bicep Curl",
@@ -473,48 +410,8 @@ const DEFAULT_EXERCISES = [
     ],
     tips: "Keep elbows glued in place like door hinges; don't let them drift forward or back."
   },
-  {
-    id: "ex_hammer_curl",
-    name: "Dumbbell Hammer Curl",
-    muscleGroup: "Arms",
-    secondaryMuscles: ["Brachialis", "Forearms", "Biceps"],
-    equipment: "Dumbbell",
-    difficulty: "Beginner",
-    category: "Hypertrophy",
-    caloriesPerMin: 5.4,
-    defaultSets: 3,
-    defaultReps: 12,
-    restSeconds: 60,
-    instructions: [
-      "Stand holding dumbbells at your sides with neutral grip (palms facing inward).",
-      "Keep upper arms still and curl weights upward towards shoulders.",
-      "Hold peak squeeze for a brief count.",
-      "Lower dumbbells with control back to starting position."
-    ],
-    tips: "Builds the brachialis muscle beneath the bicep, pushing the peak up higher and widening arms."
-  },
-  {
-    id: "ex_skullcrushers",
-    name: "EZ-Bar Skull Crushers (Lying Triceps Extension)",
-    muscleGroup: "Arms",
-    secondaryMuscles: ["Triceps Long Head"],
-    equipment: "Barbell",
-    difficulty: "Intermediate",
-    category: "Hypertrophy",
-    caloriesPerMin: 6.0,
-    defaultSets: 3,
-    defaultReps: 10,
-    restSeconds: 75,
-    instructions: [
-      "Lie on flat bench holding an EZ-curl bar directly above chest with narrow overhand grip.",
-      "Angle upper arms slightly back toward your head (not straight up).",
-      "Bending only at elbows, lower bar slowly until it hovers just above your forehead or crown.",
-      "Extend elbows to press weight back up to starting position."
-    ],
-    tips: "Keep elbows pointed forward rather than flared out wide to spare the elbow joints."
-  },
 
-  // --- CORE & ABS ---
+  // --- CORE & CARDIO ---
   {
     id: "ex_hanging_leg_raise",
     name: "Hanging Leg / Knee Raise",
@@ -529,55 +426,12 @@ const DEFAULT_EXERCISES = [
     restSeconds: 60,
     instructions: [
       "Hang from a pull-up bar with overhand grip and engaged shoulders.",
-      "Brace core and raise legs straight in front of you (or bend knees for an easier variation).",
+      "Brace core and raise legs straight in front of you.",
       "Raise until legs are at least parallel to floor, rounding pelvis up slightly.",
       "Lower legs slowly without swinging into the next rep."
     ],
     tips: "Focus on curling your pelvis upward, not just lifting your thigh muscles."
   },
-  {
-    id: "ex_plank",
-    name: "Front Forearm Plank",
-    muscleGroup: "Core",
-    secondaryMuscles: ["Glutes", "Shoulders", "Transverse Abdominis"],
-    equipment: "Bodyweight",
-    difficulty: "Beginner",
-    category: "Endurance",
-    caloriesPerMin: 5.0,
-    defaultSets: 3,
-    defaultReps: 45, // Seconds
-    restSeconds: 45,
-    instructions: [
-      "Place forearms on floor with elbows directly under shoulders.",
-      "Extend legs back on toes, body forming a rigid straight plank line.",
-      "Tuck pelvis slightly, squeeze glutes, and draw navel toward spine.",
-      "Hold position while breathing steadily without letting hips sag or pike."
-    ],
-    tips: "Quality of tension beats duration. Squeeze every muscle as if bracing for a punch."
-  },
-  {
-    id: "ex_cable_woodchopper",
-    name: "Cable Woodchopper",
-    muscleGroup: "Core",
-    secondaryMuscles: ["Obliques", "Shoulders"],
-    equipment: "Cable",
-    difficulty: "Intermediate",
-    category: "Functional",
-    caloriesPerMin: 6.5,
-    defaultSets: 3,
-    defaultReps: 12,
-    restSeconds: 60,
-    instructions: [
-      "Set cable pulley at shoulder or high level with single handle.",
-      "Stand sideways to machine with feet shoulder-width apart, gripping handle with both hands.",
-      "Rotate torso diagonally across body and downward toward opposite hip.",
-      "Pivot back foot slightly and engage obliques throughout rotational drive.",
-      "Control the weight back to start with controlled tempo."
-    ],
-    tips: "Power should come from rotational hips and core torso, not pulling with arms alone."
-  },
-
-  // --- CARDIO & FULL BODY ---
   {
     id: "ex_burpees",
     name: "Full Burpees",
@@ -619,47 +473,6 @@ const DEFAULT_EXERCISES = [
       "Let kettlebell free fall as you hinge back to absorb the bell into next rep."
     ],
     tips: "This is a hip hinge power movement, never a front delt shoulder raise or squat."
-  },
-  {
-    id: "ex_mountain_climbers",
-    name: "Mountain Climbers",
-    muscleGroup: "Cardio",
-    secondaryMuscles: ["Core", "Shoulders", "Hip Flexors"],
-    equipment: "Bodyweight",
-    difficulty: "Beginner",
-    category: "Endurance",
-    caloriesPerMin: 10.0,
-    defaultSets: 3,
-    defaultReps: 30, // Reps or seconds
-    restSeconds: 45,
-    instructions: [
-      "Start in a high plank position with hands under shoulders.",
-      "Drive right knee towards your chest without raising hips.",
-      "Quickly step right foot back while simultaneously driving left knee forward.",
-      "Alternate knees rapidly in a fluid running motion while keeping core tight."
-    ],
-    tips: "Do not bounce your hips up and down; keep your back flat and stable."
-  },
-  {
-    id: "ex_box_jumps",
-    name: "Plyometric Box Jumps",
-    muscleGroup: "Full Body",
-    secondaryMuscles: ["Quads", "Glutes", "Calves"],
-    equipment: "Bodyweight",
-    difficulty: "Intermediate",
-    category: "Power",
-    caloriesPerMin: 9.0,
-    defaultSets: 3,
-    defaultReps: 10,
-    restSeconds: 75,
-    instructions: [
-      "Stand about one foot away from a sturdy plyometric box.",
-      "Bend knees and swing arms back to load your hips in an athletic quarter squat.",
-      "Explode upward through legs and swing arms forward.",
-      "Land softly on the box with knees bent to absorb impact.",
-      "Stand fully upright, then step down carefully one foot at a time."
-    ],
-    tips: "Step down rather than jumping down to protect Achilles tendons and knees."
   }
 ];
 
@@ -692,7 +505,6 @@ const DEFAULT_ROUTINES = [
       "ex_barbell_deadlift",
       "ex_pullups",
       "ex_bent_over_row",
-      "ex_face_pull",
       "ex_barbell_curl"
     ]
   },
@@ -708,8 +520,7 @@ const DEFAULT_ROUTINES = [
       "ex_barbell_squat",
       "ex_romanian_deadlift",
       "ex_bulgarian_split_squat",
-      "ex_leg_extension",
-      "ex_standing_calf_raise"
+      "ex_leg_extension"
     ]
   },
   {
@@ -724,42 +535,142 @@ const DEFAULT_ROUTINES = [
       "ex_kettlebell_swing",
       "ex_burpees",
       "ex_pushups",
-      "ex_mountain_climbers",
-      "ex_plank"
-    ]
-  },
-  {
-    id: "routine_home_dumbbell",
-    title: "At-Home Dumbbell Sculpt",
-    category: "Home",
-    durationMinutes: 35,
-    difficulty: "Beginner",
-    description: "No gym required! A balanced full body sculpting routine using only a pair of dumbbells.",
-    targetMuscle: "Shoulders, Chest, Legs, Arms",
-    exerciseIds: [
-      "ex_incline_db_press",
-      "ex_lateral_raise",
-      "ex_arnold_press",
-      "ex_hammer_curl",
-      "ex_bulgarian_split_squat"
-    ]
-  },
-  {
-    id: "routine_core_shred",
-    title: "Core & Abs Crusher",
-    category: "Core",
-    durationMinutes: 20,
-    difficulty: "Beginner",
-    description: "Target rectus abdominis, obliques, and deep transverse stabilizers for rotational power and core stability.",
-    targetMuscle: "Core, Obliques, Lower Back",
-    exerciseIds: [
-      "ex_hanging_leg_raise",
-      "ex_cable_woodchopper",
-      "ex_plank",
-      "ex_mountain_climbers"
+      "ex_hanging_leg_raise"
     ]
   }
 ];
+
+// --- GYMLIFE SIGNATURE DATA (Classes, Timetable, Trainers, Pricing, Contact Info) ---
+const GYMLIFE_CLASSES = [
+  {
+    id: "cls_weightlifting",
+    title: "WEIGHTLIFTING & POWER",
+    category: "Strength",
+    coach: "Rachel Hunter",
+    desc: "Build ultimate raw power, compound technique mastery, and pure muscular density.",
+    badge: "STRENGTH"
+  },
+  {
+    id: "cls_cycling",
+    title: "INDOOR CYCLING & RPM",
+    category: "Cardio",
+    coach: "Marcus Cole",
+    desc: "High-cadence interval cycling with live rhythm tracks to maximize VO2 max and calorie burn.",
+    badge: "CARDIO"
+  },
+  {
+    id: "cls_bodybuilding",
+    title: "HYPERTROPHY BODYBUILDING",
+    category: "Aesthetics",
+    coach: "Alex Rivera",
+    desc: "Targeted mind-muscle isolation, drop sets, and peak volume for balanced sculpted aesthetics.",
+    badge: "MUSCLE"
+  },
+  {
+    id: "cls_kettlebell",
+    title: "KETTLEBELL COMBAT",
+    category: "Crossfit",
+    coach: "Sarah Connor",
+    desc: "Dynamic ballistic conditioning, rotational swings, snatches, and tactical conditioning.",
+    badge: "CROSSFIT"
+  },
+  {
+    id: "cls_boxing",
+    title: "BOXING & STRIKING",
+    category: "Combat",
+    coach: "David Hayes",
+    desc: "Heavy bag drill combos, footwork, speed rope, and high-intensity combat conditioning.",
+    badge: "BOXING"
+  },
+  {
+    id: "cls_yoga",
+    title: "MOBILITY & FLOW YOGA",
+    category: "Mobility",
+    coach: "Elena Rostova",
+    desc: "Restore joint integrity, hip mobility, spinal decompression, and athletic recovery.",
+    badge: "MOBILITY"
+  }
+];
+
+const GYMLIFE_PRICING = [
+  {
+    id: "plan_dropin",
+    title: "Class drop-in",
+    price: "39.0",
+    period: "SINGLE CLASS",
+    popular: false,
+    features: [
+      "Free riding equipment",
+      "Unlimited gym access",
+      "Personal trainer guide",
+      "Weight loss program",
+      "No commitment"
+    ]
+  },
+  {
+    id: "plan_12month",
+    title: "12 Month unlimited",
+    price: "99.0",
+    period: "SINGLE CLASS",
+    popular: true,
+    features: [
+      "Free riding equipment",
+      "Unlimited gym access",
+      "Dedicated personal coach",
+      "Custom nutrition plan",
+      "Locker room & Sauna pass",
+      "Free guest pass monthly"
+    ]
+  },
+  {
+    id: "plan_6month",
+    title: "6 Month unlimited",
+    price: "59.0",
+    period: "SINGLE CLASS",
+    popular: false,
+    features: [
+      "Free riding equipment",
+      "Unlimited gym access",
+      "Personal trainer guide",
+      "Weight loss program",
+      "Month-to-month flexibility"
+    ]
+  }
+];
+
+const GYMLIFE_TRAINERS = [
+  {
+    name: "Rachel Hunter",
+    role: "GYM Trainer",
+    specialty: "Powerlifting & Barbell Strength",
+    experience: "8+ Years"
+  },
+  {
+    name: "Alex Rivera",
+    role: "Head Coach",
+    specialty: "Hypertrophy & Physique Architecture",
+    experience: "12+ Years"
+  },
+  {
+    name: "Marcus Cole",
+    role: "Cardio Specialist",
+    specialty: "HIIT, Sprinting & Functional Conditioning",
+    experience: "7+ Years"
+  },
+  {
+    name: "Elena Rostova",
+    role: "Mobility Master",
+    specialty: "Athletic Yoga & Physical Recovery",
+    experience: "10+ Years"
+  }
+];
+
+const GYMLIFE_CONTACT_INFO = {
+  address: "333 Middle Winchendon Rd, Rindge, NH 03461",
+  phone: "125-711-811 / 125-668-886",
+  email: "Support.gymlife@gmail.com",
+  hours: "Mon - Fri: 6:00am - 10:00pm | Sat - Sun: 7:00am - 9:00pm"
+};
 
 const MUSCLE_GROUPS = [
   "All",

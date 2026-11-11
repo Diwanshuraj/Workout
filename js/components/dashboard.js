@@ -371,7 +371,8 @@ class DashboardComponent {
     const step = chartWidth / barCount;
 
     // Get dynamic theme color from CSS variables
-    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim() || '#ccff00';
+    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() ||
+      getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim() || '#f36100';
 
     days.forEach((day, idx) => {
       const x = padLeft + idx * step + (step - barWidth) / 2;

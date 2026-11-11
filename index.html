@@ -1,111 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cyber-lime">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="description" content="PulseFit - Next-Generation Dynamic Workout Tracker, Continuous Multi-Page Platform, and Performance Analytics." />
-  <meta name="theme-color" content="#07090e" />
-  <title>PulseFit &bull; Dynamic Continuous Scroll Workout Platform</title>
+  <meta name="description" content="GYMLIFE - Fitness Center, Personal Training, Class Timetables, BMI Calculator, and Live Workout Tracker." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>GYMLIFE &bull; Fitness Club & Workout Platform</title>
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body onclick="window.app.closeAllDropdowns(event)">
+<body>
 
   <!-- ======================================================================
-       DESKTOP / LAPTOP TOP NAVBAR (With Scroll-Spy Sync & Live Theme Picker)
+       TOP CONTACT INFO BAR (GymLife Header Top)
        ====================================================================== -->
-  <header class="top-navbar">
-    <div class="container nav-inner">
-      <!-- Brand Logo (Click to scroll to top) -->
-      <div class="brand-logo" onclick="window.app.scrollToSection('section-dashboard')">
-        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 20V10M12 20V4M6 20v-6"/>
-        </svg>
-        <span>PULSE<span class="brand-accent">FIT</span></span>
+  <div class="top-contact-bar">
+    <div class="container top-contact-inner">
+      <div class="contact-quick-items">
+        <div class="quick-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>333 Middle Winchendon Rd, Rindge, NH 03461</span>
+        </div>
+        <div class="quick-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Support.gymlife@gmail.com</span>
+        </div>
+        <div class="quick-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>125-711-811</span>
+        </div>
       </div>
 
-      <!-- Desktop Scroll-Nav Links -->
-      <nav class="desktop-nav-links">
-        <a href="#section-dashboard" class="nav-link active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          Dashboard
-        </a>
-        <a href="#section-exercises" class="nav-link" data-section="section-exercises" onclick="window.app.scrollToSection('section-exercises', event)">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
-          Exercise Library
-        </a>
-        <a href="#section-routines" class="nav-link" data-section="section-routines" onclick="window.app.scrollToSection('section-routines', event)">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-          Routines & Splits
-        </a>
-        <a href="#section-workout-session" class="nav-link" data-section="section-workout-session" onclick="window.app.scrollToSection('section-workout-session', event)">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Workout Player
-          <span class="live-badge-dot live-session-badge hidden"></span>
-        </a>
-        <a href="#section-logs" class="nav-link" data-section="section-logs" onclick="window.app.scrollToSection('section-logs', event)">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          History & Logs
-        </a>
-        <a href="#section-calculators" class="nav-link" data-section="section-calculators" onclick="window.app.scrollToSection('section-calculators', event)">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Tools & Calcs
-        </a>
+      <div class="social-icons-strip">
+        <a href="#contact" class="social-link" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#contact" class="social-link" title="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+        <a href="#contact" class="social-link" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+        <a href="#contact" class="social-link" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MAIN NAVBAR (GymLife Header with Smooth Scroll)
+       ====================================================================== -->
+  <header class="main-header">
+    <div class="container header-inner">
+      <!-- GymLife Brand Logo -->
+      <a href="#home" class="brand-logo" onclick="window.app.scrollToSection('home', event)">
+        <span>GYM<span class="brand-highlight">LIFE</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="main-nav-links">
+        <a href="#home" class="nav-link active" data-section="home" onclick="window.app.scrollToSection('home', event)">Home</a>
+        <a href="#about" class="nav-link" data-section="about" onclick="window.app.scrollToSection('about', event)">About Us</a>
+        <a href="#classes" class="nav-link" data-section="classes" onclick="window.app.scrollToSection('classes', event)">Classes</a>
+        <a href="#tracker" class="nav-link" data-section="tracker" onclick="window.app.scrollToSection('tracker', event)">Workout Tracker</a>
+        <a href="#bmi-calculator" class="nav-link" data-section="bmi-calculator" onclick="window.app.scrollToSection('bmi-calculator', event)">BMI Calc</a>
+        <a href="#pricing" class="nav-link" data-section="pricing" onclick="window.app.scrollToSection('pricing', event)">Pricing</a>
+        <a href="#team" class="nav-link" data-section="team" onclick="window.app.scrollToSection('team', event)">Our Team</a>
+        <a href="#contact" class="nav-link" data-section="contact" onclick="window.app.scrollToSection('contact', event)">Contact</a>
       </nav>
 
-      <!-- Right Action Controls (Theme Palette, Sound, Profile, Mobile Menu) -->
-      <div class="nav-right-controls">
-        <!-- Live Themes Dropdown Button -->
-        <div class="theme-picker-wrapper">
-          <button class="btn-icon-nav" id="themePickerBtn" onclick="window.app.toggleThemeDropdown(event)" title="Choose Theme Aesthetic">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a10 10 0 0 0 0 20v-4a6 6 0 0 1 0-12V2z" fill="currentColor"/>
-            </svg>
-          </button>
-          
-          <div id="themeDropdownMenu" class="theme-dropdown-menu hidden" onclick="event.stopPropagation()">
-            <div style="padding: 6px 10px; font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;">
-              Visual Aesthetic
-            </div>
-            <button class="theme-opt-btn active" data-theme="cyber-lime" onclick="window.app.setTheme('cyber-lime')">
-              <span class="theme-color-dot" style="background: #ccff00;"></span>
-              <span>⚡ Cyber Lime (Neon)</span>
-            </button>
-            <button class="theme-opt-btn" data-theme="crimson-fury" onclick="window.app.setTheme('crimson-fury')">
-              <span class="theme-color-dot" style="background: #ff2d55;"></span>
-              <span>🔥 Crimson Fury (Rogue)</span>
-            </button>
-            <button class="theme-opt-btn" data-theme="aurora" onclick="window.app.setTheme('aurora')">
-              <span class="theme-color-dot" style="background: #00f5ff;"></span>
-              <span>🌌 Aurora Cyber (Cyan)</span>
-            </button>
-            <button class="theme-opt-btn" data-theme="onyx-gold" onclick="window.app.setTheme('onyx-gold')">
-              <span class="theme-color-dot" style="background: #eab308;"></span>
-              <span>👑 Onyx Gold (Luxury)</span>
-            </button>
-            <button class="theme-opt-btn" data-theme="clean-light" onclick="window.app.setTheme('clean-light')">
-              <span class="theme-color-dot" style="background: #2563eb;"></span>
-              <span>☀️ Clean Studio (Light)</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Sound Cues Toggle -->
-        <button class="btn-icon-nav" id="soundToggleBtn" onclick="window.app.toggleSound()" title="Toggle Sound Cues">
-          <span id="soundToggleIcon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-          </span>
+      <!-- Right Header CTA & Mobile Hamburger -->
+      <div class="header-cta-group">
+        <button class="btn-gymlife" onclick="window.app.scrollToSection('tracker', event)">
+          Start Workout
         </button>
-
-        <!-- Athlete Profile Modal Trigger -->
-        <button class="btn-icon-nav" onclick="window.app.openSettingsModal()" title="Athlete Profile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </button>
-
-        <!-- Mobile Hamburger Button -->
-        <button class="btn-icon-nav btn-hamburger" onclick="window.app.openMobileDrawer()" title="Menu">
+        <button class="btn-hamburger" onclick="window.app.openMobileDrawer()" title="Menu">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
       </div>
@@ -113,65 +76,375 @@
   </header>
 
   <!-- ======================================================================
-       CONTINUOUS SCROLL SECTIONS (As you scroll, new pages appear!)
+       PAGE SECTION 1: HERO BANNER (GymLife Fullscreen Banner)
        ====================================================================== -->
-  <main class="container">
-    
-    <!-- PAGE SECTION 1: DASHBOARD & STATS OVERVIEW -->
-    <section id="section-dashboard" class="page-section" data-nav="section-dashboard">
-      <div class="section-indicator-strip">
-        <span class="section-num-pill">Page 01 // Overview</span>
-        <div class="section-divider-line"></div>
+  <section id="home" class="hero-gymlife-section" data-nav="home">
+    <div class="container">
+      <div class="hero-gymlife-content">
+        <span class="hero-tagline">SHAPE YOUR BODY</span>
+        <h1 class="hero-gymlife-title">BE <span>STRONG</span> TRAINING HARD</h1>
+        <p class="hero-gymlife-desc">
+          Push your athletic limits with state-of-the-art training splits, professional coaching guidance, and dynamic live set tracking.
+        </p>
+        <div class="hero-buttons-row">
+          <button class="btn-gymlife" onclick="window.app.scrollToSection('tracker', event)">
+            Start Training
+          </button>
+          <button class="btn-gymlife btn-gymlife-outline" onclick="window.app.scrollToSection('classes', event)">
+            Explore Classes
+          </button>
+        </div>
       </div>
-      <div id="dashboardMount"></div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE SECTION 2: EXERCISE LIBRARY & CUSTOM CREATOR -->
-    <section id="section-exercises" class="page-section" data-nav="section-exercises">
-      <div class="section-indicator-strip">
-        <span class="section-num-pill">Page 02 // Exercise Explorer</span>
-        <div class="section-divider-line"></div>
+  <!-- ======================================================================
+       PAGE SECTION 2: ABOUT / CHOOSE US (Why Choose Us)
+       ====================================================================== -->
+  <section id="about" class="page-section page-section-alt" data-nav="about">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">WHY CHOOSE US?</span>
+        <h2 class="section-title-gymlife">PUSH YOUR LIMITS FORWARD</h2>
       </div>
-      <div id="exerciseLibraryMount"></div>
-    </section>
 
-    <!-- PAGE SECTION 3: ROUTINES & SPLITS BUILDER -->
-    <section id="section-routines" class="page-section" data-nav="section-routines">
-      <div class="section-indicator-strip">
-        <span class="section-num-pill">Page 03 // Workout Splits & Plans</span>
-        <div class="section-divider-line"></div>
+      <div class="chooseus-grid">
+        <div class="chooseus-card">
+          <div class="chooseus-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3 class="chooseus-title">Modern equipment</h3>
+          <p class="chooseus-desc">Access cutting-edge Olympic bars, precision cables, dumbbells, and state-of-the-art plate loaded machines.</p>
+        </div>
+
+        <div class="chooseus-card">
+          <div class="chooseus-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <h3 class="chooseus-title">Healthy nutrition plan</h3>
+          <p class="chooseus-desc">Fuel your metabolism with science-backed macro splits, calorie targets, and dynamic nutritional guidance.</p>
+        </div>
+
+        <div class="chooseus-card">
+          <div class="chooseus-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="chooseus-title">Pro training plan</h3>
+          <p class="chooseus-desc">Proven periodization models: Push/Pull/Legs, Upper/Lower, and high-intensity metabolic conditioning.</p>
+        </div>
+
+        <div class="chooseus-card">
+          <div class="chooseus-icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3 class="chooseus-title">Unique to your needs</h3>
+          <p class="chooseus-desc">Customize sets, reps, and custom exercises tailored specifically for your body composition goals.</p>
+        </div>
       </div>
-      <div id="routineBuilderMount"></div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE SECTION 4: LIVE WORKOUT PLAYER & REST TIMER -->
-    <section id="section-workout-session" class="page-section" data-nav="section-workout-session">
-      <div class="section-indicator-strip">
-        <span class="section-num-pill">Page 04 // Live Workout Player</span>
-        <div class="section-divider-line"></div>
+  <!-- ======================================================================
+       PAGE SECTION 3: CLASSES SHOWCASE (GymLife Signature Programs)
+       ====================================================================== -->
+  <section id="classes" class="page-section" data-nav="classes">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">OUR CLASSES</span>
+        <h2 class="section-title-gymlife">WHAT WE CAN OFFER</h2>
       </div>
-      <div id="workoutSessionMount"></div>
-    </section>
 
-    <!-- PAGE SECTION 5: PERFORMANCE LOGS & WORKOUT ARCHIVE -->
-    <section id="section-logs" class="page-section" data-nav="section-logs">
-      <div class="section-indicator-strip">
-        <span class="section-num-pill">Page 05 // Workout History & Logs</span>
-        <div class="section-divider-line"></div>
+      <div class="classes-grid" id="gymlifeClassesGrid">
+        <!-- Dynamically populated from data.js -->
       </div>
-      <div id="historyLogsMount"></div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PAGE SECTION 6: SCIENTIFIC FITNESS CALCULATORS -->
-    <section id="section-calculators" class="page-section" data-nav="section-calculators">
-      <div class="section-indicator-strip">
-        <span class="section-num-pill">Page 06 // Tools & Calculators</span>
-        <div class="section-divider-line"></div>
+  <!-- ======================================================================
+       PAGE SECTION 4: DYNAMIC WORKOUT TRACKER & EXERCISE ENGINE
+       (100% Dynamic, Non-Hardcoded Live Session & Library)
+       ====================================================================== -->
+  <section id="tracker" class="page-section page-section-alt" data-nav="tracker">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">DYNAMIC TRAINING ENGINE</span>
+        <h2 class="section-title-gymlife">INTERACTIVE WORKOUT TRACKER</h2>
       </div>
-      <div id="calculatorsMount"></div>
-    </section>
 
-  </main>
+      <!-- Mount Points for Dynamic Workout Engine -->
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+        <!-- 1. Live Session Tracker -->
+        <div id="workoutSessionMount"></div>
+
+        <!-- 2. Dashboard Analytics & Stats -->
+        <div id="dashboardMount"></div>
+
+        <!-- 3. Pre-made & Custom Routines Builder -->
+        <div id="routineBuilderMount"></div>
+
+        <!-- 4. 50+ Movements Exercise Library -->
+        <div id="exerciseLibraryMount"></div>
+
+        <!-- 5. History & Logs -->
+        <div id="historyLogsMount"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PAGE SECTION 5: BMI CALCULATOR (GymLife Signature Section)
+       ====================================================================== -->
+  <section id="bmi-calculator" class="page-section" data-nav="bmi-calculator">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">CHECK YOUR BODY</span>
+        <h2 class="section-title-gymlife">CALCULATE YOUR BMI</h2>
+      </div>
+
+      <div class="bmi-calculator-wrap">
+        <!-- BMI Reference Chart -->
+        <div class="bmi-table-card">
+          <h3 class="bmi-table-title">BMI METRIC CHART</h3>
+          <table class="bmi-table">
+            <thead>
+              <tr>
+                <th>BMI INDEX</th>
+                <th>WEIGHT STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Below 18.5</td>
+                <td style="color: #38bdf8;">Underweight</td>
+              </tr>
+              <tr>
+                <td>18.5 - 24.9</td>
+                <td style="color: #4ade80; font-weight: 700;">Healthy / Normal</td>
+              </tr>
+              <tr>
+                <td>25.0 - 29.9</td>
+                <td style="color: #facc15;">Overweight</td>
+              </tr>
+              <tr>
+                <td>30.0 and Above</td>
+                <td style="color: #f87171;">Obese</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 16px;">
+            * Body Mass Index (BMI) is a standardized screening metric based on height and body weight.
+          </p>
+        </div>
+
+        <!-- Interactive Calculator Form -->
+        <div class="bmi-form-card">
+          <h3 class="bmi-table-title">CALCULATE METRICS</h3>
+          <form id="gymlifeBmiForm" onsubmit="window.app.calculateGymLifeBMI(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <input type="number" id="quickBmiHeight" class="gymlife-input" placeholder="Height / cm" value="178" min="100" max="230" required />
+              <input type="number" id="quickBmiWeight" class="gymlife-input" placeholder="Weight / kg" value="75" min="30" max="250" step="0.5" required />
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <input type="number" id="quickBmiAge" class="gymlife-input" placeholder="Age" value="26" min="14" max="100" />
+              <select id="quickBmiSex" class="gymlife-input">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-gymlife w-full mt-2">
+              Calculate BMI Now
+            </button>
+          </form>
+
+          <div id="quickBmiResult" class="bmi-result-banner">
+            <div>
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Your BMI Score</span>
+              <div class="bmi-score-number" id="quickBmiScore">23.7</div>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Status</span>
+              <div class="bmi-status-label" id="quickBmiStatus" style="color: #4ade80;">Normal Weight</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Fitness Tools Mount (1RM, Plate Math, Interval Timer) -->
+      <div id="calculatorsMount" style="margin-top: 40px;"></div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PAGE SECTION 6: MEMBERSHIP PRICING PLANS
+       ====================================================================== -->
+  <section id="pricing" class="page-section page-section-alt" data-nav="pricing">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">OUR PLAN</span>
+        <h2 class="section-title-gymlife">CHOOSE YOUR PRICING PLAN</h2>
+      </div>
+
+      <div class="pricing-grid" id="gymlifePricingGrid">
+        <!-- Dynamically rendered from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PAGE SECTION 7: EXPERT TRAINERS TEAM
+       ====================================================================== -->
+  <section id="team" class="page-section" data-nav="team">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">OUR TEAM</span>
+        <h2 class="section-title-gymlife">TRAIN WITH EXPERTS</h2>
+      </div>
+
+      <div class="trainers-grid" id="gymlifeTrainersGrid">
+        <!-- Dynamically rendered from data.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       PAGE SECTION 8: CONTACT SECTION
+       (Exactly matching https://preview.themewagon.com/gymlife/contact.html)
+       ====================================================================== -->
+  <section id="contact" class="page-section" data-nav="contact">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle-tag">CONTACT US</span>
+        <h2 class="section-title-gymlife">GET IN TOUCH</h2>
+      </div>
+
+      <!-- 3 Contact Info Boxes -->
+      <div class="contact-info-cards-row">
+        <div class="contact-info-box">
+          <div class="contact-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4 class="contact-box-title">Location</h4>
+            <p class="contact-box-text">333 Middle Winchendon Rd,<br/>Rindge, NH 03461</p>
+          </div>
+        </div>
+
+        <div class="contact-info-box">
+          <div class="contact-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <h4 class="contact-box-title">Support</h4>
+            <p class="contact-box-text">125-711-811<br/>125-668-886</p>
+          </div>
+        </div>
+
+        <div class="contact-info-box">
+          <div class="contact-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <h4 class="contact-box-title">Email Us</h4>
+            <p class="contact-box-text">Support.gymlife@gmail.com<br/>info.gymlife@gmail.com</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Contact Grid (Leave a Comment Form + Interactive Map) -->
+      <div class="contact-main-grid">
+        <!-- Contact Form -->
+        <div class="contact-form-card">
+          <h3 class="contact-form-title">LEAVE A COMMENT</h3>
+          <form id="gymlifeContactForm" onsubmit="window.app.handleContactSubmit(event)">
+            <input type="text" id="contactName" class="gymlife-input" placeholder="Name" required />
+            <input type="email" id="contactEmail" class="gymlife-input" placeholder="Email" required />
+            <input type="text" id="contactWebsite" class="gymlife-input" placeholder="Website / Phone" />
+            <textarea id="contactMessage" class="gymlife-textarea" rows="5" placeholder="Comment / Message" required></textarea>
+            <button type="submit" class="btn-gymlife">
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <!-- Location Map Embed -->
+        <div class="contact-map-frame">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11822.453396825442!2d-72.01258661284179!3d42.75053597916298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e15ad3911d9571%3A0x6739cfc1c73a113a!2sRindge%2C%20NH%2003461!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0; min-height: 400px;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       GYMLIFE FOOTER
+       ====================================================================== -->
+  <footer class="gymlife-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <a href="#home" class="brand-logo mb-3" style="display: inline-block;">
+            <span>GYM<span class="brand-highlight">LIFE</span></span>
+          </a>
+          <p class="footer-text">
+            Transform your physical health with dedicated coaching, precision workout routines, and high-energy fitness culture.
+          </p>
+          <div class="social-icons-strip">
+            <a href="#contact" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#contact" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></a>
+            <a href="#contact" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+            <a href="#contact" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Useful links</h4>
+          <ul class="footer-links-list">
+            <li><a href="#about" onclick="window.app.scrollToSection('about', event)">About Us</a></li>
+            <li><a href="#classes" onclick="window.app.scrollToSection('classes', event)">Classes & Programs</a></li>
+            <li><a href="#tracker" onclick="window.app.scrollToSection('tracker', event)">Workout Tracker</a></li>
+            <li><a href="#bmi-calculator" onclick="window.app.scrollToSection('bmi-calculator', event)">BMI Calculator</a></li>
+            <li><a href="#pricing" onclick="window.app.scrollToSection('pricing', event)">Pricing Plans</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Support & Hours</h4>
+          <p class="footer-text" style="margin-bottom: 8px;">
+            <strong>Mon - Fri:</strong> 6:00am - 10:00pm<br/>
+            <strong>Sat - Sun:</strong> 7:00am - 9:00pm
+          </p>
+          <p class="footer-text">
+            <strong>Phone:</strong> 125-711-811<br/>
+            <strong>Email:</strong> Support.gymlife@gmail.com
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Tips & Guides</h4>
+          <p class="footer-text">
+            Physical fitness may help prevent depression and anxiety. Subscribe for weekly training advice.
+          </p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); window.app.showToast('Thank you for subscribing!', 'success'); this.reset();">
+            <input type="email" class="newsletter-input" placeholder="Email Address" required />
+            <button type="submit" class="newsletter-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>Copyright &copy; 2026 All rights reserved | GYMLIFE Fitness Platform</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- ======================================================================
        FLOATING BACK TO TOP BUTTON
@@ -181,173 +454,88 @@
   </button>
 
   <!-- ======================================================================
-       MOBILE BOTTOM NAVIGATION BAR (Thumb Friendly & Scroll Synced)
+       MOBILE BOTTOM NAVIGATION BAR
        ====================================================================== -->
   <nav class="bottom-nav-bar">
-    <a href="#section-dashboard" class="bottom-nav-item active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
+    <a href="#home" class="bottom-nav-item active" data-section="home" onclick="window.app.scrollToSection('home', event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
       <span>Home</span>
     </a>
-    <a href="#section-exercises" class="bottom-nav-item" data-section="section-exercises" onclick="window.app.scrollToSection('section-exercises', event)">
+    <a href="#classes" class="bottom-nav-item" data-section="classes" onclick="window.app.scrollToSection('classes', event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
-      <span>Library</span>
+      <span>Classes</span>
     </a>
-    <a href="#section-routines" class="bottom-nav-item" data-section="section-routines" onclick="window.app.scrollToSection('section-routines', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-      <span>Plans</span>
-    </a>
-    <a href="#section-workout-session" class="bottom-nav-item" data-section="section-workout-session" onclick="window.app.scrollToSection('section-workout-session', event)">
+    <a href="#tracker" class="bottom-nav-item" data-section="tracker" onclick="window.app.scrollToSection('tracker', event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
       <span>Workout</span>
-      <span class="live-badge-dot live-session-badge hidden"></span>
     </a>
-    <a href="#section-logs" class="bottom-nav-item" data-section="section-logs" onclick="window.app.scrollToSection('section-logs', event)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <span>History</span>
-    </a>
-    <a href="#section-calculators" class="bottom-nav-item" data-section="section-calculators" onclick="window.app.scrollToSection('section-calculators', event)">
+    <a href="#bmi-calculator" class="bottom-nav-item" data-section="bmi-calculator" onclick="window.app.scrollToSection('bmi-calculator', event)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <span>Tools</span>
+      <span>BMI</span>
+    </a>
+    <a href="#pricing" class="bottom-nav-item" data-section="pricing" onclick="window.app.scrollToSection('pricing', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <span>Pricing</span>
+    </a>
+    <a href="#contact" class="bottom-nav-item" data-section="contact" onclick="window.app.scrollToSection('contact', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Contact</span>
     </a>
   </nav>
 
   <!-- ======================================================================
-       MOBILE DRAWER MENU (With Theme Options)
+       MOBILE DRAWER MENU
        ====================================================================== -->
   <div id="drawerBackdrop" class="drawer-backdrop hidden" onclick="window.app.closeMobileDrawer()"></div>
   <aside id="mobileDrawer" class="mobile-drawer">
     <div class="drawer-header">
-      <div class="brand-logo" onclick="window.app.scrollToSection('section-dashboard'); window.app.closeMobileDrawer();">
-        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-        <span>PULSE<span class="brand-accent">FIT</span></span>
+      <div class="brand-logo" onclick="window.app.scrollToSection('home'); window.app.closeMobileDrawer();">
+        <span>GYM<span class="brand-highlight">LIFE</span></span>
       </div>
       <button class="modal-close" onclick="window.app.closeMobileDrawer()">&times;</button>
     </div>
 
-    <!-- Navigation links -->
     <div class="drawer-nav-list">
-      <a href="#section-dashboard" class="drawer-link active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
+      <a href="#home" class="drawer-link active" data-section="home" onclick="window.app.scrollToSection('home', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        <span>Dashboard</span>
+        <span>Home</span>
       </a>
-      <a href="#section-exercises" class="drawer-link" data-section="section-exercises" onclick="window.app.scrollToSection('section-exercises', event)">
+      <a href="#about" class="drawer-link" data-section="about" onclick="window.app.scrollToSection('about', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <span>About Us</span>
+      </a>
+      <a href="#classes" class="drawer-link" data-section="classes" onclick="window.app.scrollToSection('classes', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
-        <span>Exercise Library</span>
+        <span>Classes</span>
       </a>
-      <a href="#section-routines" class="drawer-link" data-section="section-routines" onclick="window.app.scrollToSection('section-routines', event)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-        <span>Routines & Splits</span>
-      </a>
-      <a href="#section-workout-session" class="drawer-link" data-section="section-workout-session" onclick="window.app.scrollToSection('section-workout-session', event)">
+      <a href="#tracker" class="drawer-link" data-section="tracker" onclick="window.app.scrollToSection('tracker', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <span>Workout Player</span>
+        <span>Workout Tracker</span>
       </a>
-      <a href="#section-logs" class="drawer-link" data-section="section-logs" onclick="window.app.scrollToSection('section-logs', event)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span>History & Logs</span>
-      </a>
-      <a href="#section-calculators" class="drawer-link" data-section="section-calculators" onclick="window.app.scrollToSection('section-calculators', event)">
+      <a href="#bmi-calculator" class="drawer-link" data-section="bmi-calculator" onclick="window.app.scrollToSection('bmi-calculator', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>Tools & Calcs</span>
+        <span>BMI Calculator</span>
       </a>
-    </div>
-
-    <!-- Mobile Theme Switcher Section -->
-    <div class="drawer-theme-section">
-      <div class="drawer-theme-title">Color Aesthetic</div>
-      <div class="drawer-theme-grid">
-        <button class="drawer-theme-pill" data-theme="cyber-lime" onclick="window.app.setTheme('cyber-lime')">
-          <span class="theme-color-dot" style="background: #ccff00;"></span>
-          <span>⚡ Lime</span>
-        </button>
-        <button class="drawer-theme-pill" data-theme="crimson-fury" onclick="window.app.setTheme('crimson-fury')">
-          <span class="theme-color-dot" style="background: #ff2d55;"></span>
-          <span>🔥 Red</span>
-        </button>
-        <button class="drawer-theme-pill" data-theme="aurora" onclick="window.app.setTheme('aurora')">
-          <span class="theme-color-dot" style="background: #00f5ff;"></span>
-          <span>🌌 Cyan</span>
-        </button>
-        <button class="drawer-theme-pill" data-theme="onyx-gold" onclick="window.app.setTheme('onyx-gold')">
-          <span class="theme-color-dot" style="background: #eab308;"></span>
-          <span>👑 Gold</span>
-        </button>
-        <button class="drawer-theme-pill" data-theme="clean-light" style="grid-column: span 2;" onclick="window.app.setTheme('clean-light')">
-          <span class="theme-color-dot" style="background: #2563eb;"></span>
-          <span>☀️ Clean Studio (Light)</span>
-        </button>
-      </div>
+      <a href="#pricing" class="drawer-link" data-section="pricing" onclick="window.app.scrollToSection('pricing', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span>Pricing</span>
+      </a>
+      <a href="#team" class="drawer-link" data-section="team" onclick="window.app.scrollToSection('team', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Our Team</span>
+      </a>
+      <a href="#contact" class="drawer-link" data-section="contact" onclick="window.app.scrollToSection('contact', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Contact</span>
+      </a>
     </div>
 
     <div class="mt-auto">
-      <button class="btn btn-secondary w-full" onclick="window.app.openSettingsModal(); window.app.closeMobileDrawer();">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Profile & Settings
+      <button class="btn-gymlife w-full" onclick="window.app.scrollToSection('tracker', event); window.app.closeMobileDrawer();">
+        Start Training Now
       </button>
     </div>
   </aside>
-
-  <!-- ======================================================================
-       ATHLETE PROFILE & SETTINGS MODAL
-       ====================================================================== -->
-  <div id="settingsModalBackdrop" class="modal-backdrop hidden" onclick="window.app.closeSettingsModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <h3 class="modal-title">Athlete Profile & Preferences</h3>
-        <button class="modal-close" onclick="window.app.closeSettingsModal()">&times;</button>
-      </div>
-
-      <form id="settingsForm" onsubmit="window.app.saveSettings(event)">
-        <div class="form-group">
-          <label>Athlete Name / Handle</label>
-          <input type="text" id="setUserName" class="input" placeholder="e.g., Alex" required />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group flex-1">
-            <label>Weight Unit</label>
-            <select id="setUnit" class="select">
-              <option value="kg">Kilograms (kg)</option>
-              <option value="lbs">Pounds (lbs)</option>
-            </select>
-          </div>
-
-          <div class="form-group flex-1">
-            <label>Bodyweight</label>
-            <input type="number" id="setUserWeight" class="input" min="30" max="300" step="0.5" required />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group flex-1">
-            <label>Height (cm)</label>
-            <input type="number" id="setUserHeight" class="input" min="100" max="230" required />
-          </div>
-
-          <div class="form-group flex-1">
-            <label>Age (years)</label>
-            <input type="number" id="setUserAge" class="input" min="14" max="100" required />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Primary Fitness Focus</label>
-          <select id="setUserGoal" class="select">
-            <option value="hypertrophy">Muscle Hypertrophy & Aesthetics</option>
-            <option value="strength">Maximum Strength & Powerlifting</option>
-            <option value="fat_loss">Fat Loss & Conditioning</option>
-            <option value="endurance">Cardiovascular Endurance</option>
-            <option value="mobility">Longevity, Mobility & Functional</option>
-          </select>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="window.app.closeSettingsModal()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save Preferences</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- Global Toast Notifications Container -->
   <div id="toastContainer" class="toast-container"></div>
