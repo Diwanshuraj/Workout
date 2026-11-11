@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="logoOrangeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff7a00"/>
+      <stop offset="100%" stop-color="#f36100"/>
+    </linearGradient>
+    <filter id="logoGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Male Athlete (Left) Lifting Dumbbell -->
+  <g id="male_athlete" fill="#ffffff">
+    <!-- Head & Neck -->
+    <path d="M 180,95 C 160,85 155,100 150,115 C 160,120 170,125 185,130 C 190,115 195,105 180,95 Z" />
+    <polygon points="152,112 165,138 185,135 178,112" />
+
+    <!-- Muscular Left Arm & Bicep with Dumbbell -->
+    <path d="M 175,135 C 150,140 120,160 110,190 C 125,200 150,195 165,180 C 160,165 170,150 175,135 Z" />
+    <path d="M 110,190 L 130,230 L 155,220 L 140,185 Z" />
+    <!-- Dumbbell (Left Hand) -->
+    <circle cx="120" cy="170" r="22" fill="#ffffff" />
+    <circle cx="120" cy="170" r="10" fill="#0a0a0a" />
+    <rect x="114" y="160" width="12" height="40" rx="3" fill="#f36100" />
+
+    <!-- Broad Shoulders & Muscular Torso -->
+    <path d="M 180,135 C 205,145 220,165 230,190 C 220,215 200,240 180,250 C 170,230 165,185 180,135 Z" />
+    <!-- Abs & Serratus definition -->
+    <path d="M 195,190 C 205,205 210,225 210,245 C 195,245 185,235 185,220 C 185,205 190,195 195,190 Z" />
+    <path d="M 215,220 L 225,245 L 212,245 Z" />
+  </g>
+
+  <!-- Female Athlete (Right) with Ponytail Lifting Dumbbell -->
+  <g id="female_athlete" fill="#ffffff">
+    <!-- Ponytail Hair -->
+    <path d="M 270,75 C 285,60 305,65 315,75 C 310,85 295,95 285,90 C 280,85 275,80 270,75 Z" />
+    <!-- Head & Feminine Profile -->
+    <path d="M 260,85 C 280,95 285,110 290,125 C 275,130 265,120 255,105 Z" />
+
+    <!-- Athletic Right Arm with Dumbbell -->
+    <path d="M 270,130 C 290,140 320,160 330,190 C 315,200 295,195 285,180 Z" />
+    <path d="M 330,190 L 315,230 L 290,220 L 305,185 Z" />
+    <!-- Dumbbell (Right Hand) -->
+    <circle cx="320" cy="170" r="22" fill="#ffffff" />
+    <circle cx="320" cy="170" r="10" fill="#0a0a0a" />
+    <rect x="314" y="160" width="12" height="40" rx="3" fill="#f36100" />
+
+    <!-- Feminine Toned Back & Waist -->
+    <path d="M 255,130 C 240,150 235,180 240,210 C 255,220 270,205 275,185 C 275,160 265,140 255,130 Z" />
+    <path d="M 245,210 C 255,230 265,245 275,250 C 265,250 250,240 245,210 Z" />
+  </g>
+
+  <!-- Brand Title: GYMLIFE -->
+  <text x="250" y="325" font-family="'Impact', 'Montserrat', sans-serif" font-size="64" font-weight="900" letter-spacing="4" text-anchor="middle" fill="#ffffff">
+    GYM<tspan fill="#f36100">LIFE</tspan>
+  </text>
+
+  <!-- Athletic Slogan & Divider Lines -->
+  <line x1="70" y1="355" x2="160" y2="355" stroke="#f36100" stroke-width="3" stroke-linecap="round" />
+  <text x="250" y="362" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="19" font-weight="800" letter-spacing="6" text-anchor="middle" fill="#cbd5e1">
+    TRAIN WITH PASSION
+  </text>
+  <line x1="340" y1="355" x2="430" y2="355" stroke="#f36100" stroke-width="3" stroke-linecap="round" />
+</svg>

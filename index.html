@@ -46,8 +46,9 @@
        ====================================================================== -->
   <header class="main-header">
     <div class="container header-inner">
-      <!-- GymLife Brand Logo -->
+      <!-- GymLife Brand Logo with Athlete Silhouette -->
       <a href="#home" class="brand-logo" onclick="window.app.scrollToSection('home', event)">
+        <img src="assets/images/gymlife-logo-transparent.png" alt="GYMLIFE Athlete Logo" class="brand-logo-img" />
         <span>GYM<span class="brand-highlight">LIFE</span></span>
       </a>
 
@@ -91,6 +92,13 @@
         <source src="https://cdn.dribbble.com/userupload/48941796/file/7517237adcd69de5e452fc9f1db905e3.mp4" type="video/mp4" />
       </video>
       <div class="hero-fullscreen-video-overlay"></div>
+      <div class="hero-fullscreen-watermark-badge">
+        <img src="assets/images/gymlife-logo-transparent.png" alt="GYMLIFE Athlete Logo" class="fullscreen-watermark-logo" />
+        <div class="fullscreen-watermark-text">
+          <span class="fs-title">GYM<span class="brand-highlight">LIFE</span></span>
+          <span class="fs-sub">OFFICIAL APP</span>
+        </div>
+      </div>
     </div>
 
     <!-- Floating Audio & Playback Controls for Fullscreen Video -->
@@ -196,12 +204,21 @@
 
             <!-- Frame Container (Cinematic Video / Anime Character / Gym Demonstration) -->
             <div class="hero-video-frame">
-              <!-- 1. Flagship Cinematic Video Frame (User Video) -->
+              <!-- 1. Flagship Cinematic Video Frame (User Video with GYMLIFE Branding) -->
               <div id="heroCinematicFrame" class="hero-cinematic-showcase">
                 <video id="heroCinematicVideo" class="hero-cinematic-video" autoplay loop muted playsinline preload="auto">
                   <source src="assets/video/workout-cinematic.mp4" type="video/mp4" />
                   <source src="https://cdn.dribbble.com/userupload/48941796/file/7517237adcd69de5e452fc9f1db905e3.mp4" type="video/mp4" />
                 </video>
+
+                <!-- GYMLIFE Official Brand Replacement Overlay Badge -->
+                <div class="video-brand-replacement-plate">
+                  <img src="assets/images/gymlife-logo-transparent.png" alt="GYMLIFE Athlete Logo" class="plate-logo-img" />
+                  <div class="plate-text-wrap">
+                    <span class="plate-brand-name">GYM<span class="brand-highlight">LIFE</span></span>
+                    <span class="plate-tagline">TRAIN WITH PASSION</span>
+                  </div>
+                </div>
                 <div class="hero-video-overlay-bar">
                   <div class="hero-ex-info">
                     <h4>Cinematic Motion Showcase</h4>
@@ -920,7 +937,8 @@
     <div class="container">
       <div class="footer-top-grid">
         <div>
-          <a href="#home" class="brand-logo mb-3" style="display: inline-block;">
+          <a href="#home" class="brand-logo mb-3" style="display: inline-flex; align-items: center; gap: 10px;">
+            <img src="assets/images/gymlife-logo-transparent.png" alt="GYMLIFE Athlete Logo" class="brand-logo-img" />
             <span>GYM<span class="brand-highlight">LIFE</span></span>
           </a>
           <p class="footer-text">
@@ -1109,7 +1127,7 @@
       <div class="sheet-header">
         <div class="sheet-title-group">
           <span class="sheet-badge">OFFICIAL VIDEO DEMO</span>
-          <h3 class="sheet-title">PulseFit Ultra-Motion Demo</h3>
+          <h3 class="sheet-title">GYMLIFE Ultra-Motion Demo</h3>
         </div>
         <button class="sheet-close-btn" onclick="window.app.closeCinematicVideoModal()" title="Close">&times;</button>
       </div>
@@ -1136,7 +1154,8 @@
   <div id="drawerBackdrop" class="drawer-backdrop hidden" onclick="window.app.closeMobileDrawer()"></div>
   <aside id="mobileDrawer" class="mobile-drawer">
     <div class="drawer-header">
-      <div class="brand-logo" onclick="window.app.scrollToSection('home'); window.app.closeMobileDrawer();">
+      <div class="brand-logo" onclick="window.app.scrollToSection('home'); window.app.closeMobileDrawer();" style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/images/gymlife-logo-transparent.png" alt="GYMLIFE Athlete Logo" class="brand-logo-img" />
         <span>GYM<span class="brand-highlight">LIFE</span></span>
       </div>
       <button class="modal-close" onclick="window.app.closeMobileDrawer()">&times;</button>
