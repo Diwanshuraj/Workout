@@ -2183,7 +2183,8 @@ svg:not([width]):not([height]) {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: var(--transition);
@@ -2191,8 +2192,101 @@ svg:not([width]):not([height]) {
 
 .exercise-card:hover {
   transform: translateY(-2px);
-  border-color: var(--border-medium);
-  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-color);
+  box-shadow: 0 8px 30px rgba(243, 97, 0, 0.25);
+}
+
+.exercise-card-media {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: #000000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.exercise-card-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000000;
+  transition: transform 0.4s ease;
+}
+
+.exercise-card:hover .exercise-card-video {
+  transform: scale(1.05);
+}
+
+.exercise-media-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #222222 0%, #111111 100%);
+  color: var(--primary-color);
+}
+
+.exercise-media-fallback svg {
+  width: 44px;
+  height: 44px;
+  opacity: 0.6;
+}
+
+.media-overlay-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(243, 97, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.exercise-card-media .diff-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 8px var(--primary-color);
+  animation: pulseDot 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px var(--primary-color); }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.exercise-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .exercise-card-header {
@@ -2241,6 +2335,130 @@ svg:not([width]):not([height]) {
   display: flex;
   gap: 8px;
   margin-top: auto;
+}
+
+.icon-sm {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Modal High-Definition Video Player */
+.modal-video-container {
+  position: relative;
+  width: 100%;
+  max-height: 320px;
+  background: #000000;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-exercise-video {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  display: block;
+}
+
+.modal-video-banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+  padding: 16px 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.video-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.video-target-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  background: rgba(243, 97, 0, 0.15);
+  border: 1px solid rgba(243, 97, 0, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.modal-video-placeholder {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+/* Active Workout Session Exercise Video Thumbnails */
+.session-ex-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.session-ex-video-thumb {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  border-radius: 6px;
+  background: #000000;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.session-ex-video-thumb:hover {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.session-ex-video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.session-video-tag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(243, 97, 0, 0.9);
+  color: #ffffff;
+  font-size: 0.55rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.session-ex-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* ==========================================================================

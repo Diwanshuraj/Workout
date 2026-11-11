@@ -84,6 +84,7 @@ class WorkoutSessionComponent {
             name: ex.name,
             muscleGroup: ex.muscleGroup,
             equipment: ex.equipment,
+            gifUrl: ex.gifUrl || "",
             restSeconds: ex.restSeconds || 60,
             sets: Array.from({ length: ex.defaultSets || 3 }).map((_, i) => ({
               setNum: i + 1,
@@ -253,23 +254,42 @@ class WorkoutSessionComponent {
   }
 
   renderExerciseCard(exItem, exIdx, unit) {
+    const exRef = window.appState.getExerciseById(exItem.exerciseId);
+    const gifUrl = exItem.gifUrl || (exRef ? exRef.gifUrl : "");
+
     return `
       <div class="card session-exercise-card">
         <div class="session-ex-header">
-          <div>
-            <div class="exercise-badges mb-1">
-              <span class="badge" style="background-color: ${Helpers.getMuscleColor(
-                exItem.muscleGroup
-              )}20; color: ${Helpers.getMuscleColor(exItem.muscleGroup)};">
-                ${Helpers.escapeHtml(exItem.muscleGroup || "Exercise")}
-              </span>
-              <span class="badge badge-subtle">${Helpers.escapeHtml(exItem.equipment || "Standard")}</span>
+          <div class="session-ex-title-wrap">
+            ${gifUrl ? `
+              <div class="session-ex-video-thumb" onclick="window.exerciseLibrary.openDetailModal('${exItem.exerciseId}')" title="Click to view full form video">
+                <img src="${gifUrl}" alt="${Helpers.escapeHtml(exItem.name)}" loading="lazy" />
+                <span class="session-video-tag">&#9658; VIDEO</span>
+              </div>
+            ` : ""}
+            <div>
+              <div class="exercise-badges mb-1">
+                <span class="badge" style="background-color: ${Helpers.getMuscleColor(
+                  exItem.muscleGroup
+                )}20; color: ${Helpers.getMuscleColor(exItem.muscleGroup)};">
+                  ${Helpers.escapeHtml(exItem.muscleGroup || "Exercise")}
+                </span>
+                <span class="badge badge-subtle">${Helpers.escapeHtml(exItem.equipment || "Standard")}</span>
+              </div>
+              <h3 class="session-ex-name" onclick="window.exerciseLibrary.openDetailModal('${exItem.exerciseId}')" style="cursor: pointer;">
+                ${Helpers.escapeHtml(exItem.name)}
+              </h3>
             </div>
-            <h3 class="session-ex-name">${Helpers.escapeHtml(exItem.name)}</h3>
           </div>
-          <button class="btn-icon-danger" onclick="window.workoutSession.removeExercise(${exIdx})" title="Remove exercise from workout">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-          </button>
+          <div class="session-ex-actions">
+            <button class="btn btn-secondary btn-xs" onclick="window.exerciseLibrary.openDetailModal('${exItem.exerciseId}')" title="Watch animated form video">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Watch Video
+            </button>
+            <button class="btn-icon-danger" onclick="window.workoutSession.removeExercise(${exIdx})" title="Remove exercise from workout">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
         </div>
 
         <!-- Sets Table -->

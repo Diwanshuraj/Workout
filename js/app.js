@@ -363,6 +363,7 @@ class AppController {
       name: ex.name,
       muscleGroup: ex.muscleGroup,
       equipment: ex.equipment,
+      gifUrl: ex.gifUrl || "",
       restSeconds: ex.restSeconds || 60,
       sets: Array.from({ length: ex.defaultSets || 3 }).map((_, i) => ({
         setNum: i + 1,

@@ -141,46 +141,66 @@ class ExerciseLibraryComponent {
                   .map(
                     (ex) => `
                   <div class="exercise-card">
-                    <div class="exercise-card-header">
-                      <div class="exercise-badges">
-                        <span class="badge" style="background-color: ${Helpers.getMuscleColor(
-                          ex.muscleGroup
-                        )}20; color: ${Helpers.getMuscleColor(ex.muscleGroup)}; border: 1px solid ${Helpers.getMuscleColor(
-                      ex.muscleGroup
-                    )}40;">
-                          ${Helpers.escapeHtml(ex.muscleGroup)}
-                        </span>
-                        <span class="badge badge-subtle">${Helpers.escapeHtml(ex.equipment)}</span>
-                        ${ex.isCustom ? `<span class="badge badge-amber">Custom</span>` : ""}
+                    <div class="exercise-card-media" onclick="window.exerciseLibrary.openDetailModal('${ex.id}')">
+                      ${ex.gifUrl ? `
+                        <img src="${ex.gifUrl}" alt="${Helpers.escapeHtml(ex.name)}" loading="lazy" class="exercise-card-video" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="exercise-media-fallback hidden">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
+                      ` : `
+                        <div class="exercise-media-fallback">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </div>
+                      `}
+                      <div class="media-overlay-badge">
+                        <span class="pulse-dot"></span>
+                        <span>ANIMATED VIDEO</span>
                       </div>
                       <span class="diff-tag diff-${ex.difficulty.toLowerCase()}">${ex.difficulty}</span>
                     </div>
 
-                    <h3 class="exercise-card-title">${Helpers.escapeHtml(ex.name)}</h3>
-                    
-                    <div class="exercise-card-meta">
-                      <div class="meta-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
-                        <span>${ex.defaultSets} sets &times; ${ex.defaultReps} reps</span>
+                    <div class="exercise-card-body">
+                      <div class="exercise-card-header">
+                        <div class="exercise-badges">
+                          <span class="badge" style="background-color: ${Helpers.getMuscleColor(
+                            ex.muscleGroup
+                          )}20; color: ${Helpers.getMuscleColor(ex.muscleGroup)}; border: 1px solid ${Helpers.getMuscleColor(
+                            ex.muscleGroup
+                          )}40;">
+                            ${Helpers.escapeHtml(ex.muscleGroup)}
+                          </span>
+                          <span class="badge badge-subtle">${Helpers.escapeHtml(ex.equipment)}</span>
+                          ${ex.isCustom ? `<span class="badge badge-amber">Custom</span>` : ""}
+                        </div>
                       </div>
-                      <div class="meta-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <span>${ex.restSeconds}s rest</span>
-                      </div>
-                      <div class="meta-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                        <span>~${ex.caloriesPerMin} cal/min</span>
-                      </div>
-                    </div>
 
-                    <div class="exercise-card-actions">
-                      <button class="btn btn-secondary btn-sm flex-1" onclick="window.exerciseLibrary.openDetailModal('${ex.id}')">
-                        Form & Guide
-                      </button>
-                      <button class="btn btn-primary btn-sm" onclick="window.app.addExerciseToWorkout('${ex.id}')" title="Add to current workout">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        Add
-                      </button>
+                      <h3 class="exercise-card-title" onclick="window.exerciseLibrary.openDetailModal('${ex.id}')" style="cursor: pointer;">${Helpers.escapeHtml(ex.name)}</h3>
+                      
+                      <div class="exercise-card-meta">
+                        <div class="meta-item">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                          <span>${ex.defaultSets} sets &times; ${ex.defaultReps} reps</span>
+                        </div>
+                        <div class="meta-item">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                          <span>${ex.restSeconds}s rest</span>
+                        </div>
+                        <div class="meta-item">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                          <span>~${ex.caloriesPerMin} cal/min</span>
+                        </div>
+                      </div>
+
+                      <div class="exercise-card-actions">
+                        <button class="btn btn-secondary btn-sm flex-1" onclick="window.exerciseLibrary.openDetailModal('${ex.id}')">
+                          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                          Form & Video
+                        </button>
+                        <button class="btn btn-primary btn-sm" onclick="window.app.addExerciseToWorkout('${ex.id}')" title="Add to current workout">
+                          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                          Add
+                        </button>
+                      </div>
                     </div>
                   </div>
                 `
@@ -334,6 +354,25 @@ class ExerciseLibraryComponent {
           <h2 class="modal-title">${Helpers.escapeHtml(ex.name)}</h2>
         </div>
         <button class="modal-close" onclick="window.exerciseLibrary.closeDetailModal()">&times;</button>
+      </div>
+
+      <!-- Animated Workout Demonstration Video Player -->
+      <div class="modal-video-container">
+        ${ex.gifUrl ? `
+          <img src="${ex.gifUrl}" alt="${Helpers.escapeHtml(ex.name)}" class="modal-exercise-video" loading="lazy" />
+          <div class="modal-video-banner">
+            <div class="video-indicator">
+              <span class="pulse-dot"></span>
+              <span>LIVE ANIMATED FORM & TECHNIQUE GUIDE</span>
+            </div>
+            <span class="video-target-tag">${Helpers.escapeHtml(ex.equipment)} &bull; ${Helpers.escapeHtml(ex.muscleGroup)}</span>
+          </div>
+        ` : `
+          <div class="modal-video-placeholder">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Animated Workout Demo Loading...</span>
+          </div>
+        `}
       </div>
 
       <div class="modal-detail-content">
