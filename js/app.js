@@ -20,8 +20,8 @@ class AppController {
       "contact"
     ];
 
-    // Anime Beast Mode & Juice Lab State (Screen 1 & 2)
-    this.heroMode = "anime"; // "anime" or "gym"
+    // Flagship Video, Anime Beast Mode & Juice Lab State
+    this.heroMode = "cinematic"; // "cinematic", "anime", or "gym"
     this.animeExercises = [
       {
         id: "deadlift",
@@ -648,32 +648,103 @@ class AppController {
     }, 2800);
   }
 
-  // --- HERO BEAST MODE CONTROLS (Screen 1 Inspired) ---
+  // --- HERO SHOWCASE CONTROLS (Cinematic Video, Anime Beast Mode, Gym GIFs) ---
   setHeroMode(mode) {
     this.heroMode = mode;
+    const cinematicFrame = document.getElementById("heroCinematicFrame");
     const animeFrame = document.getElementById("heroAnimeFrame");
     const gymFrame = document.getElementById("heroGymFrame");
+
+    const cinematicControls = document.getElementById("heroCinematicControls");
     const animeControls = document.getElementById("heroAnimeControls");
     const gymControls = document.getElementById("heroGymControls");
+
+    const cinematicBtn = document.getElementById("heroModeCinematicBtn");
     const animeBtn = document.getElementById("heroModeAnimeBtn");
     const gymBtn = document.getElementById("heroModeGymBtn");
+    const muscleBadge = document.getElementById("heroExerciseMuscle");
 
-    if (mode === "anime") {
+    // Hide all frames & controls
+    if (cinematicFrame) cinematicFrame.classList.add("hidden");
+    if (animeFrame) animeFrame.classList.add("hidden");
+    if (gymFrame) gymFrame.classList.add("hidden");
+
+    if (cinematicControls) cinematicControls.classList.add("hidden");
+    if (animeControls) animeControls.classList.add("hidden");
+    if (gymControls) gymControls.classList.add("hidden");
+
+    if (cinematicBtn) cinematicBtn.classList.remove("active");
+    if (animeBtn) animeBtn.classList.remove("active");
+    if (gymBtn) gymBtn.classList.remove("active");
+
+    const vid = document.getElementById("heroCinematicVideo");
+
+    if (mode === "cinematic") {
+      if (cinematicFrame) cinematicFrame.classList.remove("hidden");
+      if (cinematicControls) cinematicControls.classList.remove("hidden");
+      if (cinematicBtn) cinematicBtn.classList.add("active");
+      if (muscleBadge) muscleBadge.textContent = "HD Motion • 60 FPS";
+      if (vid && vid.paused) vid.play().catch(() => {});
+    } else if (mode === "anime") {
       if (animeFrame) animeFrame.classList.remove("hidden");
-      if (gymFrame) gymFrame.classList.add("hidden");
       if (animeControls) animeControls.classList.remove("hidden");
-      if (gymControls) gymControls.classList.add("hidden");
       if (animeBtn) animeBtn.classList.add("active");
-      if (gymBtn) gymBtn.classList.remove("active");
       this.updateAnimeDisplay();
-    } else {
-      if (animeFrame) animeFrame.classList.add("hidden");
+      if (vid && !vid.paused) vid.pause();
+    } else if (mode === "gym") {
       if (gymFrame) gymFrame.classList.remove("hidden");
-      if (animeControls) animeControls.classList.add("hidden");
       if (gymControls) gymControls.classList.remove("hidden");
-      if (animeBtn) animeBtn.classList.remove("active");
       if (gymBtn) gymBtn.classList.add("active");
+      if (muscleBadge) muscleBadge.textContent = "Chest • Barbell";
+      if (vid && !vid.paused) vid.pause();
     }
+  }
+
+  toggleCinematicSound() {
+    const vid = document.getElementById("heroCinematicVideo");
+    const btn = document.getElementById("cinematicSoundToggle");
+    if (!vid) return;
+
+    vid.muted = !vid.muted;
+    if (btn) btn.textContent = vid.muted ? "🔇" : "🔊";
+    this.showToast(vid.muted ? "Video muted" : "Video sound unmuted", "info");
+  }
+
+  toggleCinematicPlay() {
+    const vid = document.getElementById("heroCinematicVideo");
+    const btn = document.getElementById("cinematicPlayToggle");
+    if (!vid) return;
+
+    if (vid.paused) {
+      vid.play();
+      if (btn) btn.textContent = "⏸️";
+    } else {
+      vid.pause();
+      if (btn) btn.textContent = "▶️";
+    }
+  }
+
+  openCinematicVideoModal() {
+    const backdrop = document.getElementById("cinematicModalBackdrop");
+    const modalVid = document.getElementById("modalTheatreVideo");
+    const heroVid = document.getElementById("heroCinematicVideo");
+
+    if (backdrop) backdrop.classList.remove("hidden");
+    if (heroVid && !heroVid.paused) heroVid.pause();
+    if (modalVid) {
+      modalVid.currentTime = (heroVid && heroVid.currentTime) ? heroVid.currentTime : 0;
+      modalVid.play().catch(() => {});
+    }
+  }
+
+  closeCinematicVideoModal() {
+    const backdrop = document.getElementById("cinematicModalBackdrop");
+    const modalVid = document.getElementById("modalTheatreVideo");
+    const heroVid = document.getElementById("heroCinematicVideo");
+
+    if (backdrop) backdrop.classList.add("hidden");
+    if (modalVid && !modalVid.paused) modalVid.pause();
+    if (heroVid && this.heroMode === "cinematic") heroVid.play().catch(() => {});
   }
 
   switchAnimeExercise(id, btnEl) {

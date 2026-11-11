@@ -19,7 +19,9 @@ const MIME_TYPES = {
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".svg": "image/svg+xml",
-  ".ico": "image/x-icon"
+  ".ico": "image/x-icon",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm"
 };
 
 const server = http.createServer((req, res) => {
@@ -49,6 +51,8 @@ const server = http.createServer((req, res) => {
 
     res.writeHead(200, {
       "Content-Type": contentType,
+      "Content-Length": stats.size,
+      "Accept-Ranges": "bytes",
       "Cache-Control": "no-cache"
     });
 
