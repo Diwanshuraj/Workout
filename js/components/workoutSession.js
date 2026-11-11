@@ -124,7 +124,7 @@ class WorkoutSessionComponent {
         <div class="session-empty-state">
           <div class="session-empty-card">
             <div class="empty-icon-pulse">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
             <h2>No Active Workout Right Now</h2>
             <p>Pick a structured program from your routines, or start a blank workout and add exercises on the fly!</p>

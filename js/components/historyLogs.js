@@ -84,7 +84,7 @@ class HistoryLogsComponent {
         ${
           logs.length === 0
             ? `<div class="empty-state">
-                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 <h3>No Workout Logs Found</h3>
                 <p>Complete a workout session to see your training records and overload metrics here.</p>
                 <button class="btn btn-primary mt-3" onclick="window.app.startQuickWorkout()">Start a Workout Now</button>

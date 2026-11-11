@@ -129,7 +129,7 @@ class DashboardComponent {
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-icon-wrap icon-emerald">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             </div>
             <div class="stat-content">
               <div class="stat-label">Total Workouts</div>
@@ -140,7 +140,7 @@ class DashboardComponent {
 
           <div class="stat-card">
             <div class="stat-icon-wrap icon-amber">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <div class="stat-content">
               <div class="stat-label">Current Streak</div>
@@ -151,7 +151,7 @@ class DashboardComponent {
 
           <div class="stat-card">
             <div class="stat-icon-wrap icon-cyan">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
             </div>
             <div class="stat-content">
               <div class="stat-label">Total Volume</div>
@@ -162,7 +162,7 @@ class DashboardComponent {
 
           <div class="stat-card">
             <div class="stat-icon-wrap icon-rose">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div class="stat-content">
               <div class="stat-label">Time Trained</div>
@@ -256,8 +256,12 @@ class DashboardComponent {
               ${
                 logs.length === 0
                   ? `<div class="empty-state">
-                      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                      <p>No workouts recorded yet. Start your first session today!</p>
+                      <svg class="empty-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                      <p>No workouts recorded yet. Start your first session today to track your streak and volume!</p>
+                      <button class="btn btn-primary btn-sm mt-2" onclick="window.workoutSession.startNewSession()">
+                        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Start First Workout
+                      </button>
                     </div>`
                   : `<div class="recent-logs-list">
                       ${logs
