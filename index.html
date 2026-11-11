@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" data-theme="cyber-lime">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="PulseFit - Next-Generation Dynamic Workout Tracker, Continuous Multi-Page Platform, and Performance Analytics." />
-  <meta name="theme-color" content="#090d16" />
+  <meta name="theme-color" content="#07090e" />
   <title>PulseFit &bull; Dynamic Continuous Scroll Workout Platform</title>
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body onclick="window.app.closeAllDropdowns(event)">
 
   <!-- ======================================================================
-       DESKTOP / LAPTOP TOP NAVBAR (With Scroll-Spy Sync)
+       DESKTOP / LAPTOP TOP NAVBAR (With Scroll-Spy Sync & Live Theme Picker)
        ====================================================================== -->
   <header class="top-navbar">
     <div class="container nav-inner">
@@ -54,19 +54,53 @@
         </a>
       </nav>
 
-      <!-- Right Action Controls (Theme, Sound, Profile) -->
+      <!-- Right Action Controls (Theme Palette, Sound, Profile, Mobile Menu) -->
       <div class="nav-right-controls">
+        <!-- Live Themes Dropdown Button -->
+        <div class="theme-picker-wrapper">
+          <button class="btn-icon-nav" id="themePickerBtn" onclick="window.app.toggleThemeDropdown(event)" title="Choose Theme Aesthetic">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a10 10 0 0 0 0 20v-4a6 6 0 0 1 0-12V2z" fill="currentColor"/>
+            </svg>
+          </button>
+          
+          <div id="themeDropdownMenu" class="theme-dropdown-menu hidden" onclick="event.stopPropagation()">
+            <div style="padding: 6px 10px; font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;">
+              Visual Aesthetic
+            </div>
+            <button class="theme-opt-btn active" data-theme="cyber-lime" onclick="window.app.setTheme('cyber-lime')">
+              <span class="theme-color-dot" style="background: #ccff00;"></span>
+              <span>⚡ Cyber Lime (Neon)</span>
+            </button>
+            <button class="theme-opt-btn" data-theme="crimson-fury" onclick="window.app.setTheme('crimson-fury')">
+              <span class="theme-color-dot" style="background: #ff2d55;"></span>
+              <span>🔥 Crimson Fury (Rogue)</span>
+            </button>
+            <button class="theme-opt-btn" data-theme="aurora" onclick="window.app.setTheme('aurora')">
+              <span class="theme-color-dot" style="background: #00f5ff;"></span>
+              <span>🌌 Aurora Cyber (Cyan)</span>
+            </button>
+            <button class="theme-opt-btn" data-theme="onyx-gold" onclick="window.app.setTheme('onyx-gold')">
+              <span class="theme-color-dot" style="background: #eab308;"></span>
+              <span>👑 Onyx Gold (Luxury)</span>
+            </button>
+            <button class="theme-opt-btn" data-theme="clean-light" onclick="window.app.setTheme('clean-light')">
+              <span class="theme-color-dot" style="background: #2563eb;"></span>
+              <span>☀️ Clean Studio (Light)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sound Cues Toggle -->
         <button class="btn-icon-nav" id="soundToggleBtn" onclick="window.app.toggleSound()" title="Toggle Sound Cues">
           <span id="soundToggleIcon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
           </span>
         </button>
 
-        <button class="btn-icon-nav" onclick="window.app.toggleTheme()" title="Toggle Dark/Light Mode">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
-
-        <button class="btn-icon-nav" onclick="window.app.openSettingsModal()" title="Athlete Settings">
+        <!-- Athlete Profile Modal Trigger -->
+        <button class="btn-icon-nav" onclick="window.app.openSettingsModal()" title="Athlete Profile">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </button>
 
@@ -178,7 +212,7 @@
   </nav>
 
   <!-- ======================================================================
-       MOBILE DRAWER MENU
+       MOBILE DRAWER MENU (With Theme Options)
        ====================================================================== -->
   <div id="drawerBackdrop" class="drawer-backdrop hidden" onclick="window.app.closeMobileDrawer()"></div>
   <aside id="mobileDrawer" class="mobile-drawer">
@@ -190,6 +224,7 @@
       <button class="modal-close" onclick="window.app.closeMobileDrawer()">&times;</button>
     </div>
 
+    <!-- Navigation links -->
     <div class="drawer-nav-list">
       <a href="#section-dashboard" class="drawer-link active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
@@ -215,6 +250,33 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span>Tools & Calcs</span>
       </a>
+    </div>
+
+    <!-- Mobile Theme Switcher Section -->
+    <div class="drawer-theme-section">
+      <div class="drawer-theme-title">Color Aesthetic</div>
+      <div class="drawer-theme-grid">
+        <button class="drawer-theme-pill" data-theme="cyber-lime" onclick="window.app.setTheme('cyber-lime')">
+          <span class="theme-color-dot" style="background: #ccff00;"></span>
+          <span>⚡ Lime</span>
+        </button>
+        <button class="drawer-theme-pill" data-theme="crimson-fury" onclick="window.app.setTheme('crimson-fury')">
+          <span class="theme-color-dot" style="background: #ff2d55;"></span>
+          <span>🔥 Red</span>
+        </button>
+        <button class="drawer-theme-pill" data-theme="aurora" onclick="window.app.setTheme('aurora')">
+          <span class="theme-color-dot" style="background: #00f5ff;"></span>
+          <span>🌌 Cyan</span>
+        </button>
+        <button class="drawer-theme-pill" data-theme="onyx-gold" onclick="window.app.setTheme('onyx-gold')">
+          <span class="theme-color-dot" style="background: #eab308;"></span>
+          <span>👑 Gold</span>
+        </button>
+        <button class="drawer-theme-pill" data-theme="clean-light" style="grid-column: span 2;" onclick="window.app.setTheme('clean-light')">
+          <span class="theme-color-dot" style="background: #2563eb;"></span>
+          <span>☀️ Clean Studio (Light)</span>
+        </button>
+      </div>
     </div>
 
     <div class="mt-auto">

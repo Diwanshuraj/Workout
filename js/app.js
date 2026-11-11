@@ -1,12 +1,14 @@
 /**
  * Main Application Orchestrator
  * Continuous multi-page scroll architecture with IntersectionObserver Scroll-Spy,
- * smooth scrolling navigation, user settings, toast notifications, & theme management.
+ * live theme switcher (Cyber Lime, Crimson Fury, Aurora, Onyx Gold, Clean Light),
+ * smooth scrolling navigation, user settings, toast notifications, & audio management.
  */
 
 class AppController {
   constructor() {
     this.currentSection = "section-dashboard";
+    this.currentTheme = localStorage.getItem("pulse_fit_selected_theme") || "cyber-lime";
     this.scrollSpyObserver = null;
     this.sections = [
       "section-dashboard",
@@ -19,7 +21,10 @@ class AppController {
   }
 
   init() {
-    // 1. Initialize and render all components into their respective continuous sections
+    // 1. Apply saved theme aesthetic
+    this.applyTheme(this.currentTheme);
+
+    // 2. Initialize and render all components into continuous sections
     window.dashboard = new DashboardComponent("dashboardMount");
     window.exerciseLibrary = new ExerciseLibraryComponent("exerciseLibraryMount");
     window.routineBuilder = new RoutineBuilderComponent("routineBuilderMount");
@@ -27,16 +32,13 @@ class AppController {
     window.historyLogs = new HistoryLogsComponent("historyLogsMount");
     window.calculators = new CalculatorsComponent("calculatorsMount");
 
-    // 2. Render all sections immediately
+    // 3. Initial render across all sections
     window.dashboard.render();
     window.exerciseLibrary.render();
     window.routineBuilder.render();
     window.workoutSession.render();
     window.historyLogs.render();
     window.calculators.render();
-
-    // 3. Apply theme & sound settings
-    this.applySettingsToUI();
 
     // 4. Setup Scroll-Spy and Back-to-Top button
     this.setupScrollSpy();
@@ -45,6 +47,72 @@ class AppController {
     // 5. Active session live indicators
     this.updateActiveSessionBadge();
     window.appState.on("sessionChanged", () => this.updateActiveSessionBadge());
+  }
+
+  // --- THEME SWITCHING (5 World-Class Themes) ---
+  setTheme(themeName) {
+    this.currentTheme = themeName;
+    localStorage.setItem("pulse_fit_selected_theme", themeName);
+    this.applyTheme(themeName);
+
+    // Close dropdown
+    const menu = document.getElementById("themeDropdownMenu");
+    if (menu) menu.classList.add("hidden");
+
+    // Re-draw canvas chart with new accent colors
+    if (window.dashboard) {
+      setTimeout(() => window.dashboard.drawWeeklyChart(), 100);
+    }
+
+    const themeTitles = {
+      "cyber-lime": "⚡ Cyber Lime (Electric Neon)",
+      "crimson-fury": "🔥 Crimson Fury (Rogue Red)",
+      "aurora": "🌌 Aurora Cyber (Cyan & Violet)",
+      "onyx-gold": "👑 Onyx Gold (Luxury Metallic)",
+      "clean-light": "☀️ Clean Studio (Minimalist Light)"
+    };
+
+    this.showToast(`Theme updated: ${themeTitles[themeName] || themeName}`, "success");
+  }
+
+  applyTheme(themeName) {
+    document.documentElement.setAttribute("data-theme", themeName);
+
+    // Update active highlight in dropdown
+    document.querySelectorAll(".theme-opt-btn").forEach((btn) => {
+      if (btn.getAttribute("data-theme") === themeName) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+
+    // Update mobile drawer pills
+    document.querySelectorAll(".drawer-theme-pill").forEach((pill) => {
+      if (pill.getAttribute("data-theme") === themeName) {
+        pill.classList.add("active");
+      } else {
+        pill.classList.remove("active");
+      }
+    });
+  }
+
+  toggleThemeDropdown(e) {
+    if (e) e.stopPropagation();
+    const menu = document.getElementById("themeDropdownMenu");
+    if (menu) {
+      menu.classList.toggle("hidden");
+    }
+  }
+
+  closeAllDropdowns(e) {
+    const menu = document.getElementById("themeDropdownMenu");
+    if (menu && !menu.classList.contains("hidden")) {
+      const pickerWrapper = document.querySelector(".theme-picker-wrapper");
+      if (pickerWrapper && !pickerWrapper.contains(e.target)) {
+        menu.classList.add("hidden");
+      }
+    }
   }
 
   // --- CONTINUOUS SCROLL NAVIGATION ---
@@ -69,7 +137,6 @@ class AppController {
     this.closeMobileDrawer();
   }
 
-  // Backward compatibility alias for any existing component triggers
   switchTab(tabName) {
     this.scrollToSection(tabName);
   }
@@ -139,13 +206,17 @@ class AppController {
     const btn = document.getElementById("btnBackToTop");
     if (!btn) return;
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 350) {
-        btn.classList.add("visible");
-      } else {
-        btn.classList.remove("visible");
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 350) {
+          btn.classList.add("visible");
+        } else {
+          btn.classList.remove("visible");
+        }
+      },
+      { passive: true }
+    );
   }
 
   // --- WORKOUT LAUNCHERS ---
@@ -217,37 +288,16 @@ class AppController {
     });
   }
 
-  // --- THEME & SOUND ---
-  applySettingsToUI() {
-    const s = window.appState.getSettings();
-    if (s.darkMode) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-    }
-
-    const soundIcon = document.getElementById("soundToggleIcon");
-    if (soundIcon) {
-      soundIcon.innerHTML = s.sound
-        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`
-        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
-    }
-  }
-
-  toggleTheme() {
-    const s = window.appState.getSettings();
-    window.appState.updateSettings({ darkMode: !s.darkMode });
-    this.applySettingsToUI();
-    this.showToast(s.darkMode ? "Switched to Light mode" : "Switched to Dark mode", "info");
-  }
-
   toggleSound() {
     const s = window.appState.getSettings();
     window.appState.updateSettings({ sound: !s.sound });
-    this.applySettingsToUI();
     this.showToast(s.sound ? "Sound muted" : "Audio cues enabled", "info");
+    const soundIcon = document.getElementById("soundToggleIcon");
+    if (soundIcon) {
+      soundIcon.innerHTML = s.sound
+        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`
+        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+    }
   }
 
   // --- USER SETTINGS MODAL ---

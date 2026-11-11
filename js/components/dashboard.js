@@ -370,15 +370,18 @@ class DashboardComponent {
     const barWidth = Math.min(36, (chartWidth / barCount) * 0.55);
     const step = chartWidth / barCount;
 
+    // Get dynamic theme color from CSS variables
+    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-primary').trim() || '#ccff00';
+
     days.forEach((day, idx) => {
       const x = padLeft + idx * step + (step - barWidth) / 2;
       const barHeight = (day.volume / maxVolume) * chartHeight;
       const y = padTop + chartHeight - barHeight;
 
-      // Gradient
+      // Gradient based on active theme
       const grad = ctx.createLinearGradient(0, y, 0, padTop + chartHeight);
-      grad.addColorStop(0, "#10b981");
-      grad.addColorStop(1, "rgba(16, 185, 129, 0.2)");
+      grad.addColorStop(0, accentColor);
+      grad.addColorStop(1, "rgba(255, 255, 255, 0.04)");
 
       ctx.fillStyle = day.volume > 0 ? grad : "rgba(255, 255, 255, 0.05)";
       ctx.beginPath();
