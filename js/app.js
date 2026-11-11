@@ -724,6 +724,31 @@ class AppController {
     }
   }
 
+  // --- FULLSCREEN HERO BACKGROUND VIDEO CONTROLS ---
+  toggleHeroBgAudio() {
+    const vid = document.getElementById("heroFullscreenBgVideo");
+    const icon = document.getElementById("heroBgAudioIcon");
+    if (!vid) return;
+
+    vid.muted = !vid.muted;
+    if (icon) icon.textContent = vid.muted ? "🔇" : "🔊";
+    this.showToast(vid.muted ? "Background video audio muted" : "Background video audio active", "info");
+  }
+
+  toggleHeroBgPlay() {
+    const vid = document.getElementById("heroFullscreenBgVideo");
+    const icon = document.getElementById("heroBgPlayIcon");
+    if (!vid) return;
+
+    if (vid.paused) {
+      vid.play();
+      if (icon) icon.textContent = "⏸️";
+    } else {
+      vid.pause();
+      if (icon) icon.textContent = "▶️";
+    }
+  }
+
   openCinematicVideoModal() {
     const backdrop = document.getElementById("cinematicModalBackdrop");
     const modalVid = document.getElementById("modalTheatreVideo");

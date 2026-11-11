@@ -81,9 +81,29 @@
   </header>
 
   <!-- ======================================================================
-       PAGE SECTION 1: HERO BANNER (Animated Kinetic Workout Hero)
+       PAGE SECTION 1: HERO BANNER (Fullscreen Video Landing Page)
        ====================================================================== -->
   <section id="home" class="hero-gymlife-section" data-nav="home">
+    <!-- Fullscreen Cinematic Background Video -->
+    <div class="hero-fullscreen-video-wrap">
+      <video id="heroFullscreenBgVideo" class="hero-fullscreen-video" autoplay loop muted playsinline preload="auto">
+        <source src="assets/video/workout-cinematic.mp4" type="video/mp4" />
+        <source src="https://cdn.dribbble.com/userupload/48941796/file/7517237adcd69de5e452fc9f1db905e3.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-fullscreen-video-overlay"></div>
+    </div>
+
+    <!-- Floating Audio & Playback Controls for Fullscreen Video -->
+    <div class="hero-video-floating-controls">
+      <button class="hero-video-ctrl-btn" id="heroBgAudioBtn" onclick="window.app.toggleHeroBgAudio()" title="Sound On / Off">
+        <span id="heroBgAudioIcon">🔇</span>
+        <span class="ctrl-label">Audio</span>
+      </button>
+      <button class="hero-video-ctrl-btn" id="heroBgPlayBtn" onclick="window.app.toggleHeroBgPlay()" title="Play / Pause Video">
+        <span id="heroBgPlayIcon">⏸️</span>
+      </button>
+    </div>
+
     <canvas id="heroParticlesCanvas" class="hero-particles-canvas"></canvas>
 
     <div class="container hero-container-relative">
