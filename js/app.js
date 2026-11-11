@@ -47,6 +47,10 @@ class AppController {
 
     // 4. Initial Quick BMI calculation
     this.calculateGymLifeBMI();
+
+    // 5. Initialize Tracker active tab
+    const hasActiveSession = window.appState && window.appState.getActiveSession();
+    this.switchTrackerTab(hasActiveSession ? "workout" : "dashboard");
   }
 
   // --- GYMLIFE DYNAMIC SECTIONS RENDERING ---
@@ -195,7 +199,53 @@ class AppController {
     this.closeMobileDrawer();
   }
 
+  switchTrackerTab(tabKey) {
+    let target = tabKey || "dashboard";
+    if (target === "workout-session" || target === "workout") target = "workout";
+    else if (target === "exercises" || target === "exercise-library") target = "exercises";
+    else if (target === "routines" || target === "routine-builder") target = "routines";
+    else if (target === "logs" || target === "history") target = "history";
+    else if (target === "calculators" || target === "tools") target = "calculators";
+    else if (target === "dashboard") target = "dashboard";
+
+    // Toggle active button style
+    document.querySelectorAll(".tracker-tab-btn").forEach((btn) => {
+      if (btn.getAttribute("data-tab") === target) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+
+    // Toggle active panes
+    const panes = ["dashboard", "workout", "exercises", "routines", "history", "calculators"];
+    panes.forEach((p) => {
+      const paneEl = document.getElementById(`tab-${p}`);
+      if (!paneEl) return;
+      if (p === target) {
+        paneEl.classList.remove("hidden");
+        paneEl.classList.add("active");
+      } else {
+        paneEl.classList.add("hidden");
+        paneEl.classList.remove("active");
+      }
+    });
+
+    // Re-render the target component
+    try {
+      if (target === "dashboard" && window.dashboard) window.dashboard.render();
+      else if (target === "workout" && window.workoutSession) window.workoutSession.render();
+      else if (target === "exercises" && window.exerciseLibrary) window.exerciseLibrary.render();
+      else if (target === "routines" && window.routineBuilder) window.routineBuilder.render();
+      else if (target === "history" && window.historyLogs) window.historyLogs.render();
+      else if (target === "calculators" && window.calculators) window.calculators.render();
+    } catch (err) {
+      console.warn("Error re-rendering tracker tab:", err);
+    }
+  }
+
   switchTab(tabName) {
+    this.switchTrackerTab(tabName);
     this.scrollToSection("tracker");
   }
 

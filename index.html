@@ -171,22 +171,67 @@
         <h2 class="section-title-gymlife">INTERACTIVE WORKOUT TRACKER</h2>
       </div>
 
-      <!-- Mount Points for Dynamic Workout Engine -->
-      <div style="display: flex; flex-direction: column; gap: 40px;">
-        <!-- 1. Live Session Tracker -->
-        <div id="workoutSessionMount"></div>
+      <!-- Tracker Sub Navigation Tabs -->
+      <div class="tracker-nav-wrapper">
+        <div class="tracker-nav-tabs">
+          <button class="tracker-tab-btn active" data-tab="dashboard" onclick="window.app.switchTrackerTab('dashboard')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 9l-5 5-4-4-6 6"/></svg>
+            <span>Dashboard</span>
+          </button>
+          <button class="tracker-tab-btn" data-tab="workout" onclick="window.app.switchTrackerTab('workout')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Live Workout</span>
+          </button>
+          <button class="tracker-tab-btn" data-tab="exercises" onclick="window.app.switchTrackerTab('exercises')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
+            <span>Exercise Library</span>
+          </button>
+          <button class="tracker-tab-btn" data-tab="routines" onclick="window.app.switchTrackerTab('routines')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            <span>Routines & Splits</span>
+          </button>
+          <button class="tracker-tab-btn" data-tab="history" onclick="window.app.switchTrackerTab('history')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Workout Logs</span>
+          </button>
+          <button class="tracker-tab-btn" data-tab="calculators" onclick="window.app.switchTrackerTab('calculators')">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Pro Calculators</span>
+          </button>
+        </div>
+      </div>
 
-        <!-- 2. Dashboard Analytics & Stats -->
-        <div id="dashboardMount"></div>
+      <!-- Mount Points for Dynamic Workout Engine (Tabbed Panes) -->
+      <div class="tracker-content-area">
+        <!-- 1. Dashboard Analytics & Stats -->
+        <div id="tab-dashboard" class="tracker-pane">
+          <div id="dashboardMount"></div>
+        </div>
 
-        <!-- 3. Pre-made & Custom Routines Builder -->
-        <div id="routineBuilderMount"></div>
+        <!-- 2. Live Session Tracker -->
+        <div id="tab-workout" class="tracker-pane hidden">
+          <div id="workoutSessionMount"></div>
+        </div>
 
-        <!-- 4. 50+ Movements Exercise Library -->
-        <div id="exerciseLibraryMount"></div>
+        <!-- 3. 50+ Movements Exercise Library -->
+        <div id="tab-exercises" class="tracker-pane hidden">
+          <div id="exerciseLibraryMount"></div>
+        </div>
+
+        <!-- 4. Pre-made & Custom Routines Builder -->
+        <div id="tab-routines" class="tracker-pane hidden">
+          <div id="routineBuilderMount"></div>
+        </div>
 
         <!-- 5. History & Logs -->
-        <div id="historyLogsMount"></div>
+        <div id="tab-history" class="tracker-pane hidden">
+          <div id="historyLogsMount"></div>
+        </div>
+
+        <!-- 6. Pro Fitness Calculators -->
+        <div id="tab-calculators" class="tracker-pane hidden">
+          <div id="calculatorsMount"></div>
+        </div>
       </div>
     </div>
   </section>
