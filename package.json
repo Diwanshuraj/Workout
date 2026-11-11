@@ -1,0 +1,21 @@
+{
+  "name": "pulsefit-workout-app",
+  "version": "1.0.0",
+  "description": "PulseFit - Fully Responsive, Dynamic Workout Platform & Fitness Tracker",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "workout",
+    "fitness",
+    "responsive",
+    "tracker",
+    "gym",
+    "calisthenics",
+    "exercise-database"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

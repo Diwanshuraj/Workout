@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="PulseFit - Next-Generation Dynamic Workout Tracker, Continuous Multi-Page Platform, and Performance Analytics." />
+  <meta name="theme-color" content="#090d16" />
+  <title>PulseFit &bull; Dynamic Continuous Scroll Workout Platform</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       DESKTOP / LAPTOP TOP NAVBAR (With Scroll-Spy Sync)
+       ====================================================================== -->
+  <header class="top-navbar">
+    <div class="container nav-inner">
+      <!-- Brand Logo (Click to scroll to top) -->
+      <div class="brand-logo" onclick="window.app.scrollToSection('section-dashboard')">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 20V10M12 20V4M6 20v-6"/>
+        </svg>
+        <span>PULSE<span class="brand-accent">FIT</span></span>
+      </div>
+
+      <!-- Desktop Scroll-Nav Links -->
+      <nav class="desktop-nav-links">
+        <a href="#section-dashboard" class="nav-link active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          Dashboard
+        </a>
+        <a href="#section-exercises" class="nav-link" data-section="section-exercises" onclick="window.app.scrollToSection('section-exercises', event)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
+          Exercise Library
+        </a>
+        <a href="#section-routines" class="nav-link" data-section="section-routines" onclick="window.app.scrollToSection('section-routines', event)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          Routines & Splits
+        </a>
+        <a href="#section-workout-session" class="nav-link" data-section="section-workout-session" onclick="window.app.scrollToSection('section-workout-session', event)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Workout Player
+          <span class="live-badge-dot live-session-badge hidden"></span>
+        </a>
+        <a href="#section-logs" class="nav-link" data-section="section-logs" onclick="window.app.scrollToSection('section-logs', event)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          History & Logs
+        </a>
+        <a href="#section-calculators" class="nav-link" data-section="section-calculators" onclick="window.app.scrollToSection('section-calculators', event)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Tools & Calcs
+        </a>
+      </nav>
+
+      <!-- Right Action Controls (Theme, Sound, Profile) -->
+      <div class="nav-right-controls">
+        <button class="btn-icon-nav" id="soundToggleBtn" onclick="window.app.toggleSound()" title="Toggle Sound Cues">
+          <span id="soundToggleIcon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </span>
+        </button>
+
+        <button class="btn-icon-nav" onclick="window.app.toggleTheme()" title="Toggle Dark/Light Mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+
+        <button class="btn-icon-nav" onclick="window.app.openSettingsModal()" title="Athlete Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="btn-icon-nav btn-hamburger" onclick="window.app.openMobileDrawer()" title="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       CONTINUOUS SCROLL SECTIONS (As you scroll, new pages appear!)
+       ====================================================================== -->
+  <main class="container">
+    
+    <!-- PAGE SECTION 1: DASHBOARD & STATS OVERVIEW -->
+    <section id="section-dashboard" class="page-section" data-nav="section-dashboard">
+      <div class="section-indicator-strip">
+        <span class="section-num-pill">Page 01 // Overview</span>
+        <div class="section-divider-line"></div>
+      </div>
+      <div id="dashboardMount"></div>
+    </section>
+
+    <!-- PAGE SECTION 2: EXERCISE LIBRARY & CUSTOM CREATOR -->
+    <section id="section-exercises" class="page-section" data-nav="section-exercises">
+      <div class="section-indicator-strip">
+        <span class="section-num-pill">Page 02 // Exercise Explorer</span>
+        <div class="section-divider-line"></div>
+      </div>
+      <div id="exerciseLibraryMount"></div>
+    </section>
+
+    <!-- PAGE SECTION 3: ROUTINES & SPLITS BUILDER -->
+    <section id="section-routines" class="page-section" data-nav="section-routines">
+      <div class="section-indicator-strip">
+        <span class="section-num-pill">Page 03 // Workout Splits & Plans</span>
+        <div class="section-divider-line"></div>
+      </div>
+      <div id="routineBuilderMount"></div>
+    </section>
+
+    <!-- PAGE SECTION 4: LIVE WORKOUT PLAYER & REST TIMER -->
+    <section id="section-workout-session" class="page-section" data-nav="section-workout-session">
+      <div class="section-indicator-strip">
+        <span class="section-num-pill">Page 04 // Live Workout Player</span>
+        <div class="section-divider-line"></div>
+      </div>
+      <div id="workoutSessionMount"></div>
+    </section>
+
+    <!-- PAGE SECTION 5: PERFORMANCE LOGS & WORKOUT ARCHIVE -->
+    <section id="section-logs" class="page-section" data-nav="section-logs">
+      <div class="section-indicator-strip">
+        <span class="section-num-pill">Page 05 // Workout History & Logs</span>
+        <div class="section-divider-line"></div>
+      </div>
+      <div id="historyLogsMount"></div>
+    </section>
+
+    <!-- PAGE SECTION 6: SCIENTIFIC FITNESS CALCULATORS -->
+    <section id="section-calculators" class="page-section" data-nav="section-calculators">
+      <div class="section-indicator-strip">
+        <span class="section-num-pill">Page 06 // Tools & Calculators</span>
+        <div class="section-divider-line"></div>
+      </div>
+      <div id="calculatorsMount"></div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       FLOATING BACK TO TOP BUTTON
+       ====================================================================== -->
+  <button id="btnBackToTop" class="btn-back-to-top" onclick="window.app.scrollToTop()" title="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- ======================================================================
+       MOBILE BOTTOM NAVIGATION BAR (Thumb Friendly & Scroll Synced)
+       ====================================================================== -->
+  <nav class="bottom-nav-bar">
+    <a href="#section-dashboard" class="bottom-nav-item active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#section-exercises" class="bottom-nav-item" data-section="section-exercises" onclick="window.app.scrollToSection('section-exercises', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
+      <span>Library</span>
+    </a>
+    <a href="#section-routines" class="bottom-nav-item" data-section="section-routines" onclick="window.app.scrollToSection('section-routines', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+      <span>Plans</span>
+    </a>
+    <a href="#section-workout-session" class="bottom-nav-item" data-section="section-workout-session" onclick="window.app.scrollToSection('section-workout-session', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <span>Workout</span>
+      <span class="live-badge-dot live-session-badge hidden"></span>
+    </a>
+    <a href="#section-logs" class="bottom-nav-item" data-section="section-logs" onclick="window.app.scrollToSection('section-logs', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>History</span>
+    </a>
+    <a href="#section-calculators" class="bottom-nav-item" data-section="section-calculators" onclick="window.app.scrollToSection('section-calculators', event)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Tools</span>
+    </a>
+  </nav>
+
+  <!-- ======================================================================
+       MOBILE DRAWER MENU
+       ====================================================================== -->
+  <div id="drawerBackdrop" class="drawer-backdrop hidden" onclick="window.app.closeMobileDrawer()"></div>
+  <aside id="mobileDrawer" class="mobile-drawer">
+    <div class="drawer-header">
+      <div class="brand-logo" onclick="window.app.scrollToSection('section-dashboard'); window.app.closeMobileDrawer();">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        <span>PULSE<span class="brand-accent">FIT</span></span>
+      </div>
+      <button class="modal-close" onclick="window.app.closeMobileDrawer()">&times;</button>
+    </div>
+
+    <div class="drawer-nav-list">
+      <a href="#section-dashboard" class="drawer-link active" data-section="section-dashboard" onclick="window.app.scrollToSection('section-dashboard', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="#section-exercises" class="drawer-link" data-section="section-exercises" onclick="window.app.scrollToSection('section-exercises', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/></svg>
+        <span>Exercise Library</span>
+      </a>
+      <a href="#section-routines" class="drawer-link" data-section="section-routines" onclick="window.app.scrollToSection('section-routines', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        <span>Routines & Splits</span>
+      </a>
+      <a href="#section-workout-session" class="drawer-link" data-section="section-workout-session" onclick="window.app.scrollToSection('section-workout-session', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Workout Player</span>
+      </a>
+      <a href="#section-logs" class="drawer-link" data-section="section-logs" onclick="window.app.scrollToSection('section-logs', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>History & Logs</span>
+      </a>
+      <a href="#section-calculators" class="drawer-link" data-section="section-calculators" onclick="window.app.scrollToSection('section-calculators', event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Tools & Calcs</span>
+      </a>
+    </div>
+
+    <div class="mt-auto">
+      <button class="btn btn-secondary w-full" onclick="window.app.openSettingsModal(); window.app.closeMobileDrawer();">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profile & Settings
+      </button>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       ATHLETE PROFILE & SETTINGS MODAL
+       ====================================================================== -->
+  <div id="settingsModalBackdrop" class="modal-backdrop hidden" onclick="window.app.closeSettingsModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Athlete Profile & Preferences</h3>
+        <button class="modal-close" onclick="window.app.closeSettingsModal()">&times;</button>
+      </div>
+
+      <form id="settingsForm" onsubmit="window.app.saveSettings(event)">
+        <div class="form-group">
+          <label>Athlete Name / Handle</label>
+          <input type="text" id="setUserName" class="input" placeholder="e.g., Alex" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>Weight Unit</label>
+            <select id="setUnit" class="select">
+              <option value="kg">Kilograms (kg)</option>
+              <option value="lbs">Pounds (lbs)</option>
+            </select>
+          </div>
+
+          <div class="form-group flex-1">
+            <label>Bodyweight</label>
+            <input type="number" id="setUserWeight" class="input" min="30" max="300" step="0.5" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>Height (cm)</label>
+            <input type="number" id="setUserHeight" class="input" min="100" max="230" required />
+          </div>
+
+          <div class="form-group flex-1">
+            <label>Age (years)</label>
+            <input type="number" id="setUserAge" class="input" min="14" max="100" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Primary Fitness Focus</label>
+          <select id="setUserGoal" class="select">
+            <option value="hypertrophy">Muscle Hypertrophy & Aesthetics</option>
+            <option value="strength">Maximum Strength & Powerlifting</option>
+            <option value="fat_loss">Fat Loss & Conditioning</option>
+            <option value="endurance">Cardiovascular Endurance</option>
+            <option value="mobility">Longevity, Mobility & Functional</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="window.app.closeSettingsModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Preferences</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global Toast Notifications Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- ======================================================================
+       SCRIPTS (Loaded sequentially without external dependencies)
+       ====================================================================== -->
+  <script src="js/data.js"></script>
+  <script src="js/utils/audio.js"></script>
+  <script src="js/utils/helpers.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/components/dashboard.js"></script>
+  <script src="js/components/exerciseLibrary.js"></script>
+  <script src="js/components/routineBuilder.js"></script>
+  <script src="js/components/workoutSession.js"></script>
+  <script src="js/components/historyLogs.js"></script>
+  <script src="js/components/calculators.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
